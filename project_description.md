@@ -3,6 +3,9 @@
 ## Executive Summary
 **RoamCraft** is an intelligent web application designed to simplify vacation planning. Powered by **Google Gemini 2.5 Flash** and built on a high-performance **Node.js & Express** backend, RoamCraft allows users to generate comprehensive, day-by-day travel itineraries in real-time streaming mode.
 
+* **Live Web Application**: [https://roamcraft.onrender.com](https://roamcraft.onrender.com)
+* **GitHub Repository**: [https://github.com/sagun-glitch/RoamCraft](https://github.com/sagun-glitch/RoamCraft)
+
 ---
 
 ## Key Features
@@ -31,10 +34,11 @@
 
 ---
 
-## Technical Stack & Architecture
+## Technical Stack & Deployment
 
 | Component | Technology | Description |
 |---|---|---|
+| **Live Deployment** | Render Cloud Hosting | Deployed live at `https://roamcraft.onrender.com` |
 | **Backend Framework** | Node.js / Express.js | Handles REST API endpoints, static asset serving, and SSE streaming. |
 | **AI Model** | Google Gemini 2.5 Flash (`@google/generative-ai`) | High-speed generative AI for crafting structured travel itineraries. |
 | **Frontend UI** | HTML5, Vanilla CSS, JavaScript (ES6+) | Lightweight, fast client-side application with Lucide Icons & Google Fonts. |
@@ -48,9 +52,9 @@
 [ User Input Form ] 
        │
        ▼ (POST /api/generate-itinerary)
-[ Express Server ] ─── (Gemini API Request) ───► [ Google Gemini 2.5 Flash ]
-       │                                                      │
-       ◄─────── (Chunked Stream Response / SSE) ──────────────┘
+[ Express Server (Render Cloud) ] ─── (Gemini API Request) ───► [ Google Gemini 2.5 Flash ]
+       │                                                                   │
+       ◄──────────────── (Chunked Stream Response / SSE) ──────────────────┘
        │
        ▼
 [ Client UI Renderer ] (Interactive Markdown & Timeline View)
@@ -117,7 +121,7 @@ data: [DONE]
    ```bash
    npm start
    ```
-   Open `http://localhost:3000` in your web browser.
+   Open `http://localhost:3000` in your web browser or access the live app at [https://roamcraft.onrender.com](https://roamcraft.onrender.com).
 
 ---
 
@@ -129,4 +133,5 @@ data: [DONE]
 
 ## License & Credits
 - **Author**: Sagun Mardi (`sagun-glitch`)
+- **Live App**: [https://roamcraft.onrender.com](https://roamcraft.onrender.com)
 - **License**: MIT

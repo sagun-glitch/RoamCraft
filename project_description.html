@@ -92,6 +92,23 @@
             margin-bottom: 1rem;
         }
 
+        .live-link-box {
+            background-color: #fff7ed;
+            border: 2px solid var(--primary);
+            border-radius: 8px;
+            padding: 1rem 1.25rem;
+            margin: 1.25rem 0;
+            font-family: 'IBM Plex Mono', monospace;
+            font-size: 0.9rem;
+            color: var(--dark);
+        }
+
+        .live-link-box a {
+            color: var(--primary);
+            font-weight: 700;
+            text-decoration: underline;
+        }
+
         /* Feature List */
         ul, ol {
             padding-left: 1.25rem;
@@ -171,7 +188,7 @@
     <div class="doc-header">
         <div class="title-group">
             <h1>Roam<span>Craft</span></h1>
-            <p>AI-Powered Travel Itinerary Generator — Specification & Architecture</p>
+            <p>AI-Powered Travel Itinerary Generator — Technical Specification</p>
         </div>
         <div class="doc-meta">
             <strong>VERSION 1.0</strong><br>
@@ -182,6 +199,11 @@
     <h2>1. Executive Summary</h2>
     <p><strong>RoamCraft</strong> is an intelligent web application designed to simplify vacation planning. Powered by <strong>Google Gemini 2.5 Flash</strong> and built on a high-performance <strong>Node.js & Express</strong> backend, RoamCraft allows users to generate comprehensive, day-by-day travel itineraries in real-time streaming mode.</p>
 
+    <div class="live-link-box">
+        <strong>🌐 Live Deployment:</strong> <a href="https://roamcraft.onrender.com" target="_blank">https://roamcraft.onrender.com</a><br>
+        <strong>📦 GitHub Repository:</strong> <a href="https://github.com/sagun-glitch/RoamCraft" target="_blank">https://github.com/sagun-glitch/RoamCraft</a>
+    </div>
+
     <h2>2. Key Features</h2>
     <ul>
         <li><strong>Real-Time AI Streaming (Server-Sent Events)</strong>: Delivers instant markdown-formatted itinerary updates chunk-by-chunk without long loading waits.</li>
@@ -191,7 +213,7 @@
         <li><strong>Scandinavian Terracotta Sand Theme</strong>: High-contrast, clean UI designed for maximum readability without gradients or glassmorphism.</li>
     </ul>
 
-    <h2>3. Technical Stack & Architecture</h2>
+    <h2>3. Technical Stack & Deployment</h2>
     <table>
         <thead>
             <tr>
@@ -201,6 +223,11 @@
             </tr>
         </thead>
         <tbody>
+            <tr>
+                <td><strong>Live Deployment</strong></td>
+                <td>Render Cloud Hosting</td>
+                <td>Deployed live at <code>https://roamcraft.onrender.com</code></td>
+            </tr>
             <tr>
                 <td><strong>Backend Framework</strong></td>
                 <td>Node.js / Express.js</td>
@@ -239,7 +266,7 @@
         <li>Clone repository: <code>git clone https://github.com/sagun-glitch/RoamCraft.git</code></li>
         <li>Install dependencies: <code>npm install</code></li>
         <li>Add <code>.env</code> file with <code>GEMINI_API_KEY=YOUR_KEY</code></li>
-        <li>Start server: <code>npm start</code> (Open <code>http://localhost:3000</code>)</li>
+        <li>Start server: <code>npm start</code> (Open <code>http://localhost:3000</code> or visit <code>https://roamcraft.onrender.com</code>)</li>
     </ol>
 
     <div style="margin-top: 3rem; text-align: center; font-size: 0.8rem; color: #94a3b8;" class="no-print">
