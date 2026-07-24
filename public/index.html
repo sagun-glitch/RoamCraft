@@ -3,185 +3,203 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>RoamCraft — Expedition Studio</title>
-    <meta name="description" content="Build custom AI-powered travel itineraries in seconds.">
-    <!-- Google Fonts: Outfit, Inter, Fira Code -->
+    <title>RoamCraft — Digital Expedition Dossier</title>
+    <meta name="description" content="A field cartographer's trail map and expedition dossier for custom travel planning.">
+    <!-- Google Fonts: Space Grotesk, IBM Plex Mono, Caveat -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@500;600&family=Inter:wght@400;500;600;700&family=Outfit:wght@600;700;800;900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@600;700&family=IBM+Plex+Mono:ital,wght@0,400;0,500;0,600;1,400&family=Space+Grotesk:wght@600;700;800&display=swap" rel="stylesheet">
     <!-- Main Style -->
     <link rel="stylesheet" href="style.css">
     <!-- Lucide Icons -->
     <script src="https://unpkg.com/lucide@latest"></script>
 </head>
 <body>
-    <div class="split-app-wrapper">
-        <!-- LEFT CONTROL PANEL (42% Width) -->
-        <aside class="control-panel">
-            <div class="panel-header">
-                <div class="app-brand">
-                    <div class="brand-icon-box">
-                        <i data-lucide="sparkles"></i>
-                    </div>
-                    <div class="brand-info">
-                        <span class="brand-title">ROAM<span>CRAFT</span></span>
-                        <span class="brand-tag">EXPEDITION STUDIO</span>
-                    </div>
-                </div>
-                <div class="status-pill">
-                    <span class="pulse-dot"></span>
-                    <span id="status-text">Engine Ready</span>
-                </div>
-            </div>
+    <!-- Topographic SVG Contour Map Overlay -->
+    <div class="topo-map-bg" aria-hidden="true">
+        <svg width="100%" height="100%" xmlns="http://www.w3.org/2000/svg" class="contour-lines-svg">
+            <defs>
+                <pattern id="contour-pattern" width="400" height="400" patternUnits="userSpaceOnUse">
+                    <path d="M 0 100 Q 100 40 200 100 T 400 100" fill="none" stroke="var(--contour)" stroke-width="0.75" opacity="0.25"/>
+                    <path d="M 0 160 Q 120 220 240 160 T 400 160" fill="none" stroke="var(--contour)" stroke-width="0.75" opacity="0.25"/>
+                    <path d="M 0 240 Q 80 180 200 240 T 400 240" fill="none" stroke="var(--contour)" stroke-width="0.75" opacity="0.25"/>
+                    <path d="M 0 320 Q 150 380 300 320 T 400 320" fill="none" stroke="var(--contour)" stroke-width="0.75" opacity="0.25"/>
+                    <circle cx="200" cy="200" r="80" fill="none" stroke="var(--contour)" stroke-width="0.5" opacity="0.18" stroke-dasharray="3,3"/>
+                    <circle cx="200" cy="200" r="140" fill="none" stroke="var(--contour)" stroke-width="0.5" opacity="0.18"/>
+                </pattern>
+            </defs>
+            <rect width="100%" height="100%" fill="url(#contour-pattern)" />
+        </svg>
+    </div>
 
-            <!-- Main Interactive Form -->
-            <form id="itinerary-form" class="studio-form">
-                <div class="form-section">
-                    <div class="section-label">
-                        <span class="step-num">01</span>
-                        <span>WHERE & WHEN</span>
-                    </div>
-                    
-                    <!-- Destination Input -->
-                    <div class="field-box">
-                        <label for="destination">TARGET DESTINATION</label>
-                        <div class="custom-input-group">
-                            <i data-lucide="map-pin" class="field-icon"></i>
-                            <input type="text" id="destination" name="destination" placeholder="e.g. Kyoto, Tokyo, Paris, Iceland" required>
+    <div class="expedition-wrapper">
+        <!-- LEFT: Trail Permit Form Slip -->
+        <aside class="permit-panel">
+            <div class="permit-card">
+                <!-- Permit Header Stamp -->
+                <div class="permit-header">
+                    <div class="permit-badge">OFFICIAL PERMIT #884-R</div>
+                    <h1 class="permit-title">ROAMCRAFT</h1>
+                    <p class="permit-subtitle">FIELD CARTOGRAPHER'S TRAIL REGISTRATION</p>
+                </div>
+
+                <form id="itinerary-form" class="permit-form">
+                    <!-- Field 1: Destination -->
+                    <div class="permit-field">
+                        <label for="destination">01. TARGET EXPEDITION DESTINATION</label>
+                        <div class="input-slot">
+                            <input type="text" id="destination" name="destination" placeholder="e.g. Kyoto, Iceland, Patagonia, Rome" required>
                         </div>
                     </div>
 
-                    <!-- Duration Input -->
-                    <div class="field-box">
-                        <div class="label-row">
-                            <label for="days">TRIP DURATION</label>
-                            <span class="days-indicator"><strong id="days-val-display">3</strong> DAYS</span>
-                        </div>
-                        <div class="custom-input-group">
-                            <i data-lucide="calendar" class="field-icon"></i>
+                    <!-- Field 2: Duration / Days -->
+                    <div class="permit-field">
+                        <label for="days">02. TRAIL DURATION (WAYPOINT DAYS)</label>
+                        <div class="input-slot">
                             <input type="number" id="days" name="days" min="1" max="14" value="3" required>
                         </div>
                     </div>
-                </div>
 
-                <div class="form-section">
-                    <div class="section-label">
-                        <span class="step-num">02</span>
-                        <span>BUDGET & STYLE</span>
-                    </div>
-
-                    <!-- Budget Selector -->
-                    <div class="field-box">
-                        <label for="budget">BUDGET LEVEL</label>
-                        <div class="custom-input-group">
-                            <i data-lucide="wallet" class="field-icon"></i>
+                    <!-- Field 3: Budget Level -->
+                    <div class="permit-field">
+                        <label for="budget">03. EXPEDITION RATION & BUDGET</label>
+                        <div class="input-slot">
                             <select id="budget" name="budget">
-                                <option value="Budget">Budget-friendly</option>
-                                <option value="Moderate" selected>Moderate Comfort</option>
-                                <option value="Luxury">Luxury High-end</option>
+                                <option value="Budget">Backpacker / Budget</option>
+                                <option value="Moderate" selected>Standard Trek / Moderate</option>
+                                <option value="Luxury">Expedition Luxe / High-End</option>
                             </select>
                         </div>
                     </div>
 
-                    <!-- Interests Input -->
-                    <div class="field-box">
-                        <label for="interests">ACTIVITIES & VIBE</label>
-                        <div class="custom-input-group">
-                            <i data-lucide="compass" class="field-icon"></i>
-                            <input type="text" id="interests" name="interests" placeholder="e.g. street food, art galleries, ancient temples, cafes">
+                    <!-- Field 4: Interests & Vibe -->
+                    <div class="permit-field">
+                        <label for="interests">04. SPECIAL SURVEY INTERESTS</label>
+                        <div class="input-slot">
+                            <input type="text" id="interests" name="interests" placeholder="e.g. alpine views, local food, ancient ruins, cafes">
                         </div>
                     </div>
-                </div>
 
-                <!-- Form Action Buttons -->
-                <div class="panel-actions">
-                    <button type="submit" id="submit-btn" class="launch-btn">
-                        <i data-lucide="send"></i>
-                        <span>GENERATE ITINERARY</span>
-                    </button>
-                    <button type="button" id="reset-btn" class="clear-btn" title="Reset Form">
-                        <i data-lucide="rotate-ccw"></i>
-                    </button>
-                </div>
-            </form>
+                    <!-- Form Actions -->
+                    <div class="permit-actions">
+                        <button type="submit" id="submit-btn" class="stamp-btn">
+                            <i data-lucide="compass"></i>
+                            <span>CHART TRAIL ROUTE</span>
+                        </button>
+                        <button type="button" id="reset-btn" class="reset-permit-btn" title="Reset Permit">
+                            <i data-lucide="rotate-ccw"></i>
+                        </button>
+                    </div>
+                </form>
 
-            <div class="panel-footer">
-                <p>&copy; 2026 RoamCraft Dispatch Studio</p>
+                <!-- Field Notes Margin -->
+                <div class="field-margin-note">
+                    <p class="handwritten">"Ensure water supply & trail maps are checked before departure."</p>
+                </div>
             </div>
         </aside>
 
-        <!-- RIGHT WORKSPACE DISPLAY CANVAS (58% Width) -->
-        <main class="canvas-panel">
-            <!-- Top Toolbar Bar -->
-            <header class="canvas-toolbar">
-                <div class="toolbar-title">
-                    <h2>Expedition Canvas</h2>
-                    <p>Real-time AI itinerary stream output</p>
+        <!-- RIGHT / MAIN: Interactive Topo Route & Waypoint Log Canvas -->
+        <main class="chart-canvas">
+            <!-- Top Chart Header & Compass Station -->
+            <header class="chart-header">
+                <div class="chart-meta">
+                    <span class="grid-coord">GRID REF: 45°12'N 122°45'W</span>
+                    <h2 class="chart-heading">TOPOGRAPHIC ROUTE SURVEY</h2>
                 </div>
-                <div class="toolbar-actions">
-                    <button id="copy-btn" class="tool-btn" title="Copy Text" disabled>
+
+                <div class="canvas-actions-bar">
+                    <span id="status-text" class="status-indicator-tag">Map Idle</span>
+                    <button id="copy-btn" class="canvas-btn" title="Copy Route Logs" disabled>
                         <i data-lucide="copy"></i>
-                        <span>Copy</span>
+                        <span>Copy Logs</span>
                     </button>
-                    <button id="print-btn" class="tool-btn tool-btn-primary" title="Export PDF" disabled>
+                    <button id="print-btn" class="canvas-btn canvas-btn-accent" title="Print Field Report" disabled>
                         <i data-lucide="printer"></i>
-                        <span>Export PDF</span>
+                        <span>Export Report</span>
                     </button>
                 </div>
             </header>
 
-            <!-- Results Stage Canvas -->
-            <div class="stage-canvas">
-                <!-- Empty State Card -->
-                <div id="empty-state" class="stage-empty">
-                    <div class="empty-art-box">
-                        <i data-lucide="globe" class="art-icon"></i>
-                    </div>
-                    <h3>No Active Expedition Loaded</h3>
-                    <p>Enter your destination and preferences on the left control panel, then click <strong>GENERATE ITINERARY</strong>.</p>
+            <!-- Map & Route Visualizer Box -->
+            <section class="map-stage">
+                <!-- Compass Rose Component -->
+                <div class="compass-station" id="compass-station">
+                    <svg width="80" height="80" viewBox="0 0 100 100" class="compass-svg" id="compass-rose-svg">
+                        <circle cx="50" cy="50" r="46" fill="none" stroke="var(--contour)" stroke-width="1.5"/>
+                        <circle cx="50" cy="50" r="40" fill="none" stroke="var(--contour)" stroke-width="1" stroke-dasharray="2,2"/>
+                        <text x="50" y="18" fill="var(--text-light)" font-family="var(--font-mono)" font-size="10" font-weight="bold" text-anchor="middle">N</text>
+                        <text x="85" y="53" fill="var(--text-light)" font-family="var(--font-mono)" font-size="10" font-weight="bold" text-anchor="middle">E</text>
+                        <text x="50" y="88" fill="var(--text-light)" font-family="var(--font-mono)" font-size="10" font-weight="bold" text-anchor="middle">S</text>
+                        <text x="15" y="53" fill="var(--text-light)" font-family="var(--font-mono)" font-size="10" font-weight="bold" text-anchor="middle">W</text>
+                        <!-- Compass Needle -->
+                        <g id="compass-needle" style="transform-origin: 50px 50px; transition: transform 1.2s cubic-bezier(0.34, 1.56, 0.64, 1);">
+                            <polygon points="50,15 45,50 55,50" fill="var(--trail-copper)"/>
+                            <polygon points="50,85 45,50 55,50" fill="var(--sky-teal)"/>
+                            <circle cx="50" cy="50" r="4" fill="var(--parchment)"/>
+                        </g>
+                    </svg>
+                    <span class="bearing-readout" id="bearing-readout">BEARING: 000° N</span>
                 </div>
 
-                <!-- Stream Output Container -->
+                <!-- Animated Route Line Overlay (Interactive Canvas Visual) -->
+                <div class="trail-route-layer">
+                    <svg width="100%" height="100%" viewBox="0 0 800 240" preserveAspectRatio="none" class="route-svg">
+                        <path id="animated-trail-path" d="M 60,180 Q 200,60 380,140 T 720,80" fill="none" stroke="var(--trail-copper)" stroke-width="3.5" stroke-dasharray="8 6" class="trail-line-path" />
+                    </svg>
+                </div>
+
+                <!-- Empty State Overlay -->
+                <div id="empty-state" class="unmarked-map-empty">
+                    <div class="empty-compass-box">
+                        <i data-lucide="map-pin" class="empty-pin-icon"></i>
+                    </div>
+                    <h3>NO ROUTE CHARTED YET</h3>
+                    <p>Enter your expedition details on the Trail Permit to plot numbered waypoint pins across the map.</p>
+                </div>
+
+                <!-- Stream Loader -->
+                <div id="loader" class="route-loader hidden">
+                    <div class="loader-compass-spinner"></div>
+                    <span>Drawing trail route & compiling field logs...</span>
+                </div>
+
+                <!-- Error Box -->
+                <div id="error-container" class="route-error hidden">
+                    <i data-lucide="alert-triangle"></i>
+                    <div class="error-text-wrap">
+                        <h4>Chart Plotter Error</h4>
+                        <p id="error-text">Failed to plot trail route.</p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Waypoint Log Cards Output Canvas -->
+            <section class="waypoint-log-stage">
+                <!-- Itinerary Streaming Content Output -->
                 <div id="itinerary-output" class="itinerary-output hidden"></div>
 
-                <!-- Error Container -->
-                <div id="error-container" class="stage-error hidden">
-                    <i data-lucide="alert-triangle"></i>
-                    <div>
-                        <h4>Generation Failed</h4>
-                        <p id="error-text">An error occurred while generating the itinerary.</p>
-                    </div>
+                <!-- Verified Permit Postmark Badge -->
+                <div id="postmark-stamp" class="permit-postmark-card hidden">
+                    <div class="stamp-header-text">VERIFIED TRAIL PERMIT</div>
+                    <svg width="90" height="90" viewBox="0 0 110 110" class="stamp-svg">
+                        <circle cx="55" cy="55" r="48" fill="none" stroke="var(--trail-copper)" stroke-width="2" />
+                        <circle cx="55" cy="55" r="42" fill="none" stroke="var(--trail-copper)" stroke-width="1.5" stroke-dasharray="3,3" />
+                        <path id="curve-top" d="M 18,55 A 37,37 0 0 1 92,55" fill="none" />
+                        <path id="curve-bottom" d="M 92,55 A 37,37 0 0 1 18,55" fill="none" />
+                        <text fill="var(--trail-copper)" font-family="var(--font-mono)" font-size="7" font-weight="bold" letter-spacing="1">
+                            <textPath href="#curve-top" startOffset="50%" text-anchor="middle" id="stamp-destination">EXPEDITION</textPath>
+                        </text>
+                        <text fill="var(--trail-copper)" font-family="var(--font-mono)" font-size="7" font-weight="bold" letter-spacing="1.5">
+                            <textPath href="#curve-bottom" startOffset="50%" text-anchor="middle">ROAMCRAFT</textPath>
+                        </text>
+                        <line x1="55" y1="42" x2="55" y2="68" stroke="var(--trail-copper)" stroke-width="2" />
+                        <polygon points="55,38 52,44 58,44" fill="var(--trail-copper)" />
+                        <polygon points="55,72 52,66 58,66" fill="var(--trail-copper)" />
+                        <circle cx="55" cy="55" r="2" fill="var(--trail-copper)" />
+                    </svg>
                 </div>
-
-                <!-- Loader -->
-                <div id="loader" class="stage-loader hidden">
-                    <div class="loader-pulse"></div>
-                    <span>Streaming itinerary chunks from RoamCraft AI...</span>
-                </div>
-
-                <!-- Stamped Verified Badge & Tips Dock -->
-                <div class="stage-widgets">
-                    <div id="postmark-stamp" class="passport-stamp-card hidden">
-                        <div class="stamp-label">VERIFIED EXPEDITION</div>
-                        <svg width="100" height="100" viewBox="0 0 110 110" class="stamp-svg">
-                            <circle cx="55" cy="55" r="48" fill="none" stroke="var(--neon-accent)" stroke-width="2" />
-                            <circle cx="55" cy="55" r="42" fill="none" stroke="var(--neon-accent)" stroke-width="1.5" stroke-dasharray="3,3" />
-                            <path id="curve-top" d="M 18,55 A 37,37 0 0 1 92,55" fill="none" />
-                            <path id="curve-bottom" d="M 92,55 A 37,37 0 0 1 18,55" fill="none" />
-                            <text fill="var(--neon-accent)" font-family="var(--font-mono)" font-size="7" font-weight="bold" letter-spacing="1">
-                                <textPath href="#curve-top" startOffset="50%" text-anchor="middle" id="stamp-destination">DESTINATION</textPath>
-                            </text>
-                            <text fill="var(--neon-accent)" font-family="var(--font-mono)" font-size="7" font-weight="bold" letter-spacing="1.5">
-                                <textPath href="#curve-bottom" startOffset="50%" text-anchor="middle">ROAMCRAFT</textPath>
-                            </text>
-                            <line x1="55" y1="42" x2="55" y2="68" stroke="var(--neon-accent)" stroke-width="2" />
-                            <polygon points="55,38 52,44 58,44" fill="var(--neon-accent)" />
-                            <polygon points="55,72 52,66 58,66" fill="var(--neon-accent)" />
-                            <circle cx="55" cy="55" r="2" fill="var(--neon-accent)" />
-                        </svg>
-                    </div>
-                </div>
-            </div>
+            </section>
         </main>
     </div>
 
@@ -191,12 +209,29 @@
         // Initialize Lucide Icons
         lucide.createIcons();
 
-        // Update days display dynamically
-        const daysInput = document.getElementById('days');
-        const daysDisplay = document.getElementById('days-val-display');
-        if (daysInput && daysDisplay) {
-            daysInput.addEventListener('input', () => {
-                daysDisplay.textContent = daysInput.value || '1';
+        // Compass Rose Bearing Calculation & Trail Animation
+        const form = document.getElementById('itinerary-form');
+        const destinationInput = document.getElementById('destination');
+        const compassNeedle = document.getElementById('compass-needle');
+        const bearingReadout = document.getElementById('bearing-readout');
+
+        if (form) {
+            form.addEventListener('submit', () => {
+                const dest = (destinationInput ? destinationInput.value : '').trim();
+                if (dest) {
+                    // Generate deterministic bearing from string hash (0° to 359°)
+                    let hash = 0;
+                    for (let i = 0; i < dest.length; i++) {
+                        hash = dest.charCodeAt(i) + ((hash << 5) - hash);
+                    }
+                    const bearing = Math.abs(hash) % 360;
+                    if (compassNeedle) {
+                        compassNeedle.style.transform = `rotate(${bearing}deg)`;
+                    }
+                    if (bearingReadout) {
+                        bearingReadout.textContent = `BEARING: ${String(bearing).padStart(3, '0')}° N`;
+                    }
+                }
             });
         }
     </script>

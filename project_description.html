@@ -3,19 +3,20 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>RoamCraft — Project Specification</title>
+    <title>RoamCraft — Digital Expedition Dossier Specification</title>
     <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@700;800&family=Fira+Code:wght@500;600&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@600;700&family=IBM+Plex+Mono:wght@500;600&family=Space+Grotesk:wght@600;700;800&display=swap" rel="stylesheet">
     <style>
         :root {
-            --primary: #10B981;
-            --primary-dark: #059669;
-            --dark: #0B0D12;
-            --text: #334155;
-            --border: #e2e8f0;
-            --bg-subtle: #f8fafc;
+            --map-ink: #1B2A22;
+            --parchment: #E8DCC0;
+            --contour: #C9B98C;
+            --trail-copper: #B5622E;
+            --sky-teal: #3E8C82;
+            --text-dark: #1B2A22;
+            --text-light: #EFE9D8;
         }
 
         * {
@@ -25,18 +26,18 @@
         }
 
         body {
-            font-family: 'Inter', system-ui, -apple-system, sans-serif;
-            color: var(--text);
+            font-family: 'IBM Plex Mono', monospace;
+            color: var(--text-dark);
+            background-color: #FFFFFF;
             line-height: 1.6;
             padding: 3rem 4rem;
             max-width: 900px;
             margin: 0 auto;
-            background-color: #ffffff;
         }
 
         /* Header */
         .doc-header {
-            border-bottom: 3px solid var(--primary);
+            border-bottom: 3px solid var(--trail-copper);
             padding-bottom: 1.5rem;
             margin-bottom: 2rem;
             display: flex;
@@ -45,15 +46,15 @@
         }
 
         .title-group h1 {
-            font-family: 'Outfit', sans-serif;
+            font-family: 'Space Grotesk', sans-serif;
             font-size: 2.35rem;
             font-weight: 800;
-            color: var(--dark);
+            color: var(--map-ink);
             letter-spacing: -0.02em;
         }
 
         .title-group h1 span {
-            color: var(--primary);
+            color: var(--trail-copper);
         }
 
         .title-group p {
@@ -63,7 +64,7 @@
         }
 
         .doc-meta {
-            font-family: 'Fira Code', monospace;
+            font-family: 'IBM Plex Mono', monospace;
             font-size: 0.8rem;
             color: #64748b;
             text-align: right;
@@ -71,39 +72,39 @@
 
         /* Live Badge Box */
         .live-link-box {
-            background-color: #ecfdf5;
-            border: 2px solid var(--primary);
+            background-color: #fdf8ee;
+            border: 2px solid var(--trail-copper);
             border-radius: 8px;
             padding: 1.1rem 1.35rem;
             margin: 1.5rem 0 2rem;
-            font-family: 'Fira Code', monospace;
+            font-family: 'IBM Plex Mono', monospace;
             font-size: 0.9rem;
-            color: var(--dark);
+            color: var(--map-ink);
         }
 
         .live-link-box a {
-            color: var(--primary-dark);
+            color: var(--trail-copper);
             font-weight: 700;
             text-decoration: underline;
         }
 
         /* Headings */
         h2 {
-            font-family: 'Outfit', sans-serif;
+            font-family: 'Space Grotesk', sans-serif;
             font-size: 1.4rem;
             font-weight: 700;
-            color: var(--dark);
-            border-bottom: 1px solid var(--border);
+            color: var(--map-ink);
+            border-bottom: 1px solid var(--contour);
             padding-bottom: 0.4rem;
             margin-top: 2rem;
             margin-bottom: 1rem;
         }
 
         h3 {
-            font-family: 'Outfit', sans-serif;
+            font-family: 'Space Grotesk', sans-serif;
             font-size: 1.1rem;
             font-weight: 700;
-            color: var(--primary-dark);
+            color: var(--trail-copper);
             margin-top: 1.25rem;
             margin-bottom: 0.5rem;
         }
@@ -127,7 +128,7 @@
         }
 
         li strong {
-            color: var(--dark);
+            color: var(--map-ink);
         }
 
         /* Table */
@@ -139,23 +140,23 @@
         }
 
         th, td {
-            border: 1px solid var(--border);
+            border: 1px solid var(--contour);
             padding: 0.7rem 0.9rem;
             text-align: left;
         }
 
         th {
-            background-color: var(--bg-subtle);
-            font-family: 'Outfit', sans-serif;
+            background-color: #f7f3e8;
+            font-family: 'Space Grotesk', sans-serif;
             font-weight: 700;
-            color: var(--dark);
+            color: var(--map-ink);
         }
 
         /* Code & Pre */
         pre {
-            background-color: #0f172a;
-            color: #f8fafc;
-            font-family: 'Fira Code', monospace;
+            background-color: var(--map-ink);
+            color: var(--text-light);
+            font-family: 'IBM Plex Mono', monospace;
             font-size: 0.83rem;
             padding: 1.1rem;
             border-radius: 8px;
@@ -165,10 +166,10 @@
         }
 
         code {
-            font-family: 'Fira Code', monospace;
+            font-family: 'IBM Plex Mono', monospace;
             font-size: 0.86rem;
             background-color: #f1f5f9;
-            color: var(--primary-dark);
+            color: var(--trail-copper);
             padding: 0.15rem 0.4rem;
             border-radius: 4px;
         }
@@ -194,10 +195,10 @@
     <div class="doc-header">
         <div class="title-group">
             <h1>Roam<span>Craft</span></h1>
-            <p>Expedition Studio — AI-Powered Travel Dispatch Engine</p>
+            <p>Digital Expedition Dossier — Technical Specification</p>
         </div>
         <div class="doc-meta">
-            <strong>VERSION 3.0</strong><br>
+            <strong>VERSION 4.0</strong><br>
             July 2026
         </div>
     </div>
@@ -208,15 +209,14 @@
     </div>
 
     <h2>1. Executive Summary</h2>
-    <p><strong>RoamCraft</strong> is an AI-driven vacation planning platform built with <strong>Node.js, Express, and Google Gemini</strong>. Featuring a <strong>Split-Screen Expedition Studio UI</strong>, it streams personalized day-by-day itineraries live via <strong>Server-Sent Events (SSE)</strong> based on user destination, duration, budget tier, and custom activity preferences.</p>
+    <p><strong>RoamCraft</strong> is designed as a digital expedition dossier and field cartographer's trail map. Built with <strong>Node.js, Express, and Google Gemini</strong>, it streams personalized day-by-day itineraries live via <strong>Server-Sent Events (SSE)</strong> rendered across a topographic contour-line canvas with live compass bearing calculations.</p>
 
-    <h2>2. Key Highlights & Features</h2>
+    <h2>2. Design Metaphor & Tokens</h2>
     <ul>
-        <li><strong>Split-Screen Expedition Studio Paradigm</strong>: Engineered with a dual-canvas layout—left control panel for interactive trip parameter building and right stage canvas for real-time itinerary stream rendering.</li>
-        <li><strong>Real-Time AI Streaming</strong>: Delivers instant markdown-formatted itinerary updates chunk-by-chunk using Server-Sent Events (SSE) without long loading delays.</li>
-        <li><strong>Precision Personalization</strong>: Tailors daily itineraries based on budget tier (Budget-friendly, Moderate, Luxury) and custom interest preferences.</li>
-        <li><strong>Interactive Day-by-Day Dashboard</strong>: Renders structured day blocks with morning/afternoon/evening schedules, interactive packing checkboxes, and local travel tips.</li>
-        <li><strong>Cyber Charcoal & Emerald Slate Theme</strong>: High-contrast, clean UI built with Outfit & Fira Code fonts—strictly NO gradients and NO glassmorphism.</li>
+        <li><strong>Field Permit Registration Slip</strong>: Left permit panel styled on parchment (<code>#E8DCC0</code>) with stamped toggle chips and handwritten field margin notes.</li>
+        <li><strong>Topographic Map Canvas</strong>: Deep pine (<code>#1B2A22</code>) page background with SVG contour hairline rules (<code>#C9B98C</code>).</li>
+        <li><strong>Animated Route Line & Compass Rose</strong>: Copper trail path (<code>#B5622E</code>) that animates across the map as itineraries compile, paired with a rotating live compass needle.</li>
+        <li><strong>Typography</strong>: Header typography in <code>Space Grotesk</code>, data/body in <code>IBM Plex Mono</code>, and hand-lettered margin notes in <code>Caveat</code>.</li>
     </ul>
 
     <h2>3. Technical Stack & Architecture</h2>
@@ -247,7 +247,7 @@
             <tr>
                 <td><strong>Frontend UI</strong></td>
                 <td>HTML5 / Vanilla CSS / ES6+ JS</td>
-                <td>Expedition Studio split-screen interface built with Outfit, Inter & Fira Code fonts, and Lucide Icons</td>
+                <td>Field Expedition Dossier built with Space Grotesk, IBM Plex Mono & Caveat fonts, and Lucide Icons</td>
             </tr>
             <tr>
                 <td><strong>Streaming Protocol</strong></td>
@@ -267,15 +267,7 @@
   "interests": "temples, tea houses, ramen"
 }</code></pre>
 
-    <h2>5. Local Development & Deployment</h2>
-    <ol>
-        <li>Clone repository: <code>git clone https://github.com/sagun-glitch/RoamCraft.git</code></li>
-        <li>Install dependencies: <code>npm install</code></li>
-        <li>Configure environment file <code>.env</code> with <code>GEMINI_API_KEY=YOUR_KEY</code></li>
-        <li>Start server: <code>npm start</code> (Open <code>http://localhost:3000</code> or visit <code>https://roamcraft.onrender.com</code>)</li>
-    </ol>
-
-    <h2>6. Metadata & Credits</h2>
+    <h2>5. Metadata & Credits</h2>
     <ul>
         <li><strong>Project Name</strong>: RoamCraft</li>
         <li><strong>Author / Owner</strong>: Sagun Mardi (<code>sagun-glitch</code>)</li>
