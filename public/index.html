@@ -3,206 +3,186 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>RoamCraft — Smart Travel Dispatch</title>
-    <meta name="description" content="Create custom day-by-day travel itineraries in seconds.">
-    <!-- Google Fonts: Plus Jakarta Sans & JetBrains Mono -->
+    <title>RoamCraft — Expedition Studio</title>
+    <meta name="description" content="Build custom AI-powered travel itineraries in seconds.">
+    <!-- Google Fonts: Outfit, Inter, Fira Code -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@500;600&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@500;600&family=Inter:wght@400;500;600;700&family=Outfit:wght@600;700;800;900&display=swap" rel="stylesheet">
     <!-- Main Style -->
     <link rel="stylesheet" href="style.css">
     <!-- Lucide Icons -->
     <script src="https://unpkg.com/lucide@latest"></script>
 </head>
 <body>
-    <div class="app-shell">
-        <!-- Sidebar Navigation -->
-        <aside class="app-sidebar">
-            <div class="sidebar-top">
-                <div class="brand-badge">
+    <div class="split-app-wrapper">
+        <!-- LEFT CONTROL PANEL (42% Width) -->
+        <aside class="control-panel">
+            <div class="panel-header">
+                <div class="app-brand">
                     <div class="brand-icon-box">
-                        <i data-lucide="compass" class="brand-icon"></i>
+                        <i data-lucide="sparkles"></i>
                     </div>
-                    <div class="brand-text">
-                        <span class="brand-title">Roam<span class="brand-highlight">Craft</span></span>
-                        <span class="brand-subtitle">DISPATCH STUDIO</span>
+                    <div class="brand-info">
+                        <span class="brand-title">ROAM<span>CRAFT</span></span>
+                        <span class="brand-tag">EXPEDITION STUDIO</span>
                     </div>
                 </div>
-
-                <nav class="sidebar-nav">
-                    <a href="#" class="nav-link active"><i data-lucide="map"></i> <span>Trip Builder</span></a>
-                    <a href="#" class="nav-link"><i data-lucide="bookmark"></i> <span>Saved Itineraries</span></a>
-                    <a href="#" class="nav-link"><i data-lucide="shield-check"></i> <span>Travel Hacks</span></a>
-                </nav>
+                <div class="status-pill">
+                    <span class="pulse-dot"></span>
+                    <span id="status-text">Engine Ready</span>
+                </div>
             </div>
 
-            <div class="sidebar-bottom">
-                <div class="system-status-box">
-                    <div class="status-indicator"></div>
-                    <div class="status-info">
-                        <span class="status-label">SYSTEM STATUS</span>
-                        <span id="status-text" class="status-val">Ready to plan your trip</span>
+            <!-- Main Interactive Form -->
+            <form id="itinerary-form" class="studio-form">
+                <div class="form-section">
+                    <div class="section-label">
+                        <span class="step-num">01</span>
+                        <span>WHERE & WHEN</span>
+                    </div>
+                    
+                    <!-- Destination Input -->
+                    <div class="field-box">
+                        <label for="destination">TARGET DESTINATION</label>
+                        <div class="custom-input-group">
+                            <i data-lucide="map-pin" class="field-icon"></i>
+                            <input type="text" id="destination" name="destination" placeholder="e.g. Kyoto, Tokyo, Paris, Iceland" required>
+                        </div>
+                    </div>
+
+                    <!-- Duration Input -->
+                    <div class="field-box">
+                        <div class="label-row">
+                            <label for="days">TRIP DURATION</label>
+                            <span class="days-indicator"><strong id="days-val-display">3</strong> DAYS</span>
+                        </div>
+                        <div class="custom-input-group">
+                            <i data-lucide="calendar" class="field-icon"></i>
+                            <input type="number" id="days" name="days" min="1" max="14" value="3" required>
+                        </div>
                     </div>
                 </div>
+
+                <div class="form-section">
+                    <div class="section-label">
+                        <span class="step-num">02</span>
+                        <span>BUDGET & STYLE</span>
+                    </div>
+
+                    <!-- Budget Selector -->
+                    <div class="field-box">
+                        <label for="budget">BUDGET LEVEL</label>
+                        <div class="custom-input-group">
+                            <i data-lucide="wallet" class="field-icon"></i>
+                            <select id="budget" name="budget">
+                                <option value="Budget">Budget-friendly</option>
+                                <option value="Moderate" selected>Moderate Comfort</option>
+                                <option value="Luxury">Luxury High-end</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <!-- Interests Input -->
+                    <div class="field-box">
+                        <label for="interests">ACTIVITIES & VIBE</label>
+                        <div class="custom-input-group">
+                            <i data-lucide="compass" class="field-icon"></i>
+                            <input type="text" id="interests" name="interests" placeholder="e.g. street food, art galleries, ancient temples, cafes">
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Form Action Buttons -->
+                <div class="panel-actions">
+                    <button type="submit" id="submit-btn" class="launch-btn">
+                        <i data-lucide="send"></i>
+                        <span>GENERATE ITINERARY</span>
+                    </button>
+                    <button type="button" id="reset-btn" class="clear-btn" title="Reset Form">
+                        <i data-lucide="rotate-ccw"></i>
+                    </button>
+                </div>
+            </form>
+
+            <div class="panel-footer">
+                <p>&copy; 2026 RoamCraft Dispatch Studio</p>
             </div>
         </aside>
 
-        <!-- Main Workspace Area -->
-        <div class="workspace-area">
-            <!-- Top Workspace Header -->
-            <header class="workspace-header">
-                <div class="header-titles">
-                    <h1>Travel Dispatch Engine</h1>
-                    <p>Enter your destination & travel style to compile a custom daily itinerary.</p>
+        <!-- RIGHT WORKSPACE DISPLAY CANVAS (58% Width) -->
+        <main class="canvas-panel">
+            <!-- Top Toolbar Bar -->
+            <header class="canvas-toolbar">
+                <div class="toolbar-title">
+                    <h2>Expedition Canvas</h2>
+                    <p>Real-time AI itinerary stream output</p>
                 </div>
-                <div class="header-actions">
-                    <button id="copy-btn" class="action-btn" title="Copy Itinerary" disabled>
+                <div class="toolbar-actions">
+                    <button id="copy-btn" class="tool-btn" title="Copy Text" disabled>
                         <i data-lucide="copy"></i>
-                        <span>Copy Plan</span>
+                        <span>Copy</span>
                     </button>
-                    <button id="print-btn" class="action-btn action-btn-accent" title="Print Itinerary" disabled>
+                    <button id="print-btn" class="tool-btn tool-btn-primary" title="Export PDF" disabled>
                         <i data-lucide="printer"></i>
                         <span>Export PDF</span>
                     </button>
                 </div>
             </header>
 
-            <!-- Main Interactive Form Section -->
-            <section class="builder-card">
-                <form id="itinerary-form" class="builder-form">
-                    <div class="form-row-grid">
-                        <!-- Input 1: Destination -->
-                        <div class="input-block">
-                            <label for="destination"><i data-lucide="globe"></i> DESTINATION CITY OR COUNTRY</label>
-                            <div class="input-wrapper">
-                                <i data-lucide="map-pin" class="input-icon"></i>
-                                <input type="text" id="destination" name="destination" placeholder="e.g. Kyoto, Rome, Reykjavik, Tokyo" required>
-                            </div>
-                        </div>
-
-                        <!-- Input 2: Days -->
-                        <div class="input-block">
-                            <label for="days"><i data-lucide="clock"></i> DURATION (DAYS)</label>
-                            <div class="input-wrapper">
-                                <i data-lucide="calendar" class="input-icon"></i>
-                                <input type="number" id="days" name="days" min="1" max="14" value="3" required>
-                            </div>
-                        </div>
-
-                        <!-- Input 3: Budget Tier -->
-                        <div class="input-block">
-                            <label for="budget"><i data-lucide="wallet"></i> BUDGET LEVEL</label>
-                            <div class="input-wrapper">
-                                <i data-lucide="credit-card" class="input-icon"></i>
-                                <select id="budget" name="budget">
-                                    <option value="Budget">Budget-friendly</option>
-                                    <option value="Moderate" selected>Moderate</option>
-                                    <option value="Luxury">Luxury / High-end</option>
-                                </select>
-                            </div>
-                        </div>
+            <!-- Results Stage Canvas -->
+            <div class="stage-canvas">
+                <!-- Empty State Card -->
+                <div id="empty-state" class="stage-empty">
+                    <div class="empty-art-box">
+                        <i data-lucide="globe" class="art-icon"></i>
                     </div>
+                    <h3>No Active Expedition Loaded</h3>
+                    <p>Enter your destination and preferences on the left control panel, then click <strong>GENERATE ITINERARY</strong>.</p>
+                </div>
 
-                    <!-- Input 4: Interests -->
-                    <div class="input-block">
-                        <label for="interests"><i data-lucide="sparkles"></i> ACTIVITIES & PERSONAL INTERESTS</label>
-                        <div class="input-wrapper">
-                            <i data-lucide="heart" class="input-icon"></i>
-                            <input type="text" id="interests" name="interests" placeholder="e.g. local street food, art galleries, historical walking tours, coffee shops">
-                        </div>
+                <!-- Stream Output Container -->
+                <div id="itinerary-output" class="itinerary-output hidden"></div>
+
+                <!-- Error Container -->
+                <div id="error-container" class="stage-error hidden">
+                    <i data-lucide="alert-triangle"></i>
+                    <div>
+                        <h4>Generation Failed</h4>
+                        <p id="error-text">An error occurred while generating the itinerary.</p>
                     </div>
+                </div>
 
-                    <!-- Form CTA Bar -->
-                    <div class="builder-actions">
-                        <button type="submit" id="submit-btn" class="cta-btn primary-cta">
-                            <i data-lucide="send"></i>
-                            <span>Compile Trip Itinerary</span>
-                        </button>
-                        <button type="button" id="reset-btn" class="cta-btn secondary-cta">
-                            <i data-lucide="rotate-ccw"></i>
-                            <span>Reset Form</span>
-                        </button>
-                    </div>
-                </form>
-            </section>
+                <!-- Loader -->
+                <div id="loader" class="stage-loader hidden">
+                    <div class="loader-pulse"></div>
+                    <span>Streaming itinerary chunks from RoamCraft AI...</span>
+                </div>
 
-            <!-- Results & Sidebar Section -->
-            <div class="results-layout">
-                <!-- Primary Itinerary Display -->
-                <main class="results-main">
-                    <!-- Empty State -->
-                    <div id="empty-state" class="empty-state-card">
-                        <div class="empty-state-content">
-                            <div class="empty-icon-wrap">
-                                <i data-lucide="navigation"></i>
-                            </div>
-                            <h3>No Active Itinerary Generated</h3>
-                            <p>Configure your destination and preferences above, then click <strong>Compile Trip Itinerary</strong> to build your itinerary.</p>
-                        </div>
-                    </div>
-
-                    <!-- Streaming Output Container -->
-                    <div id="itinerary-output" class="itinerary-output hidden"></div>
-
-                    <!-- Error Container -->
-                    <div id="error-container" class="error-card hidden">
-                        <i data-lucide="alert-triangle" class="error-card-icon"></i>
-                        <div class="error-card-body">
-                            <h4>Generation Failure</h4>
-                            <p id="error-text">An unexpected error occurred while communicating with the AI dispatch engine.</p>
-                        </div>
-                    </div>
-
-                    <!-- Loading Indicator -->
-                    <div id="loader" class="loader-banner hidden">
-                        <div class="loader-spinner"></div>
-                        <span>Streaming daily travel itinerary from RoamCraft AI...</span>
-                    </div>
-                </main>
-
-                <!-- Sidebar Auxiliary Deck -->
-                <aside class="results-sidebar">
-                    <!-- Stamped Stamp Badge -->
-                    <div id="postmark-stamp" class="stamp-box hidden">
-                        <div class="stamp-badge-title">OFFICIAL DISPATCH</div>
-                        <svg width="110" height="110" viewBox="0 0 110 110" class="stamp-svg">
-                            <circle cx="55" cy="55" r="48" fill="none" stroke="var(--primary-accent)" stroke-width="2" />
-                            <circle cx="55" cy="55" r="42" fill="none" stroke="var(--primary-accent)" stroke-width="1.5" stroke-dasharray="3,3" />
+                <!-- Stamped Verified Badge & Tips Dock -->
+                <div class="stage-widgets">
+                    <div id="postmark-stamp" class="passport-stamp-card hidden">
+                        <div class="stamp-label">VERIFIED EXPEDITION</div>
+                        <svg width="100" height="100" viewBox="0 0 110 110" class="stamp-svg">
+                            <circle cx="55" cy="55" r="48" fill="none" stroke="var(--neon-accent)" stroke-width="2" />
+                            <circle cx="55" cy="55" r="42" fill="none" stroke="var(--neon-accent)" stroke-width="1.5" stroke-dasharray="3,3" />
                             <path id="curve-top" d="M 18,55 A 37,37 0 0 1 92,55" fill="none" />
                             <path id="curve-bottom" d="M 92,55 A 37,37 0 0 1 18,55" fill="none" />
-                            <text fill="var(--primary-accent)" font-family="var(--font-mono)" font-size="7" font-weight="bold" letter-spacing="1">
+                            <text fill="var(--neon-accent)" font-family="var(--font-mono)" font-size="7" font-weight="bold" letter-spacing="1">
                                 <textPath href="#curve-top" startOffset="50%" text-anchor="middle" id="stamp-destination">DESTINATION</textPath>
                             </text>
-                            <text fill="var(--primary-accent)" font-family="var(--font-mono)" font-size="7" font-weight="bold" letter-spacing="1.5">
-                                <textPath href="#curve-bottom" startOffset="50%" text-anchor="middle">ROAMCRAFT AI</textPath>
+                            <text fill="var(--neon-accent)" font-family="var(--font-mono)" font-size="7" font-weight="bold" letter-spacing="1.5">
+                                <textPath href="#curve-bottom" startOffset="50%" text-anchor="middle">ROAMCRAFT</textPath>
                             </text>
-                            <line x1="55" y1="42" x2="55" y2="68" stroke="var(--primary-accent)" stroke-width="2" />
-                            <polygon points="55,38 52,44 58,44" fill="var(--primary-accent)" />
-                            <polygon points="55,72 52,66 58,66" fill="var(--primary-accent)" />
-                            <circle cx="55" cy="55" r="2" fill="var(--primary-accent)" />
+                            <line x1="55" y1="42" x2="55" y2="68" stroke="var(--neon-accent)" stroke-width="2" />
+                            <polygon points="55,38 52,44 58,44" fill="var(--neon-accent)" />
+                            <polygon points="55,72 52,66 58,66" fill="var(--neon-accent)" />
+                            <circle cx="55" cy="55" r="2" fill="var(--neon-accent)" />
                         </svg>
                     </div>
-
-                    <!-- Travel Hacks Card -->
-                    <div class="tips-box">
-                        <div class="tips-box-header">
-                            <i data-lucide="zap"></i>
-                            <h3>Travel Tips</h3>
-                        </div>
-                        <ul class="tips-list">
-                            <li>Reserve popular museum & landmark tickets online in advance to skip queue lines.</li>
-                            <li>Save digital backups of passport pages and hotel vouchers on your mobile device.</li>
-                            <li>Investigate 24-hour or 72-hour metro passes for unlimited city transit.</li>
-                        </ul>
-                    </div>
-                </aside>
+                </div>
             </div>
-
-            <!-- Footer -->
-            <footer class="app-footer">
-                <p>&copy; 2026 RoamCraft Dispatch Studio. All rights reserved.</p>
-            </footer>
-        </div>
+        </main>
     </div>
 
     <!-- App Script -->
@@ -210,6 +190,15 @@
     <script>
         // Initialize Lucide Icons
         lucide.createIcons();
+
+        // Update days display dynamically
+        const daysInput = document.getElementById('days');
+        const daysDisplay = document.getElementById('days-val-display');
+        if (daysInput && daysDisplay) {
+            daysInput.addEventListener('input', () => {
+                daysDisplay.textContent = daysInput.value || '1';
+            });
+        }
     </script>
 </body>
 </html>
