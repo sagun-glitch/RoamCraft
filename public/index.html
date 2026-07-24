@@ -3,8 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>RoamCraft — Easy Trip Planner</title>
-    <meta name="description" content="Create custom day-by-day travel itineraries in seconds.">
+    <title>RoamCraft — Digital Expedition Dossier</title>
+    <meta name="description" content="A field cartographer's trail map and expedition dossier for custom travel planning.">
     <!-- Google Fonts: Space Grotesk, IBM Plex Mono, Caveat -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -15,17 +15,27 @@
     <script src="https://unpkg.com/lucide@latest"></script>
 </head>
 <body>
-    <!-- Topographic SVG Contour Map Overlay -->
+    <!-- Multi-Layer Topographic SVG Contour Map Background -->
     <div class="topo-map-bg" aria-hidden="true">
         <svg width="100%" height="100%" xmlns="http://www.w3.org/2000/svg" class="contour-lines-svg">
             <defs>
                 <pattern id="contour-pattern" width="400" height="400" patternUnits="userSpaceOnUse">
-                    <path d="M 0 100 Q 100 40 200 100 T 400 100" fill="none" stroke="var(--contour)" stroke-width="0.75" opacity="0.25"/>
-                    <path d="M 0 160 Q 120 220 240 160 T 400 160" fill="none" stroke="var(--contour)" stroke-width="0.75" opacity="0.25"/>
-                    <path d="M 0 240 Q 80 180 200 240 T 400 240" fill="none" stroke="var(--contour)" stroke-width="0.75" opacity="0.25"/>
-                    <path d="M 0 320 Q 150 380 300 320 T 400 320" fill="none" stroke="var(--contour)" stroke-width="0.75" opacity="0.25"/>
-                    <circle cx="200" cy="200" r="80" fill="none" stroke="var(--contour)" stroke-width="0.5" opacity="0.18" stroke-dasharray="3,3"/>
-                    <circle cx="200" cy="200" r="140" fill="none" stroke="var(--contour)" stroke-width="0.5" opacity="0.18"/>
+                    <!-- Layer 1 Primary Elevation Contours -->
+                    <path d="M 0 60 Q 100 20 200 60 T 400 60" fill="none" stroke="var(--contour)" stroke-width="0.8" opacity="0.3"/>
+                    <path d="M 0 120 Q 140 180 260 120 T 400 120" fill="none" stroke="var(--contour)" stroke-width="0.8" opacity="0.3"/>
+                    <path d="M 0 200 Q 80 140 200 200 T 400 200" fill="none" stroke="var(--contour)" stroke-width="0.8" opacity="0.3"/>
+                    <path d="M 0 280 Q 160 340 300 280 T 400 280" fill="none" stroke="var(--contour)" stroke-width="0.8" opacity="0.3"/>
+                    <path d="M 0 350 Q 120 300 220 350 T 400 350" fill="none" stroke="var(--contour)" stroke-width="0.8" opacity="0.3"/>
+                    
+                    <!-- Layer 2 Concentric Elevation Peaks & Hash Marks -->
+                    <circle cx="200" cy="200" r="50" fill="none" stroke="var(--contour)" stroke-width="0.6" stroke-dasharray="2,2" opacity="0.22"/>
+                    <circle cx="200" cy="200" r="100" fill="none" stroke="var(--contour)" stroke-width="0.6" opacity="0.2"/>
+                    <circle cx="200" cy="200" r="160" fill="none" stroke="var(--contour)" stroke-width="0.6" stroke-dasharray="4,4" opacity="0.15"/>
+                    
+                    <!-- Cartographic Survey Crosshairs -->
+                    <path d="M 195 200 L 205 200 M 200 195 L 200 205" stroke="var(--contour)" stroke-width="1" opacity="0.4"/>
+                    <path d="M 0 0 L 10 0 M 0 0 L 0 10" stroke="var(--contour)" stroke-width="1" opacity="0.3"/>
+                    <path d="M 400 0 L 390 0 M 400 0 L 400 10" stroke="var(--contour)" stroke-width="1" opacity="0.3"/>
                 </pattern>
             </defs>
             <rect width="100%" height="100%" fill="url(#contour-pattern)" />
@@ -125,7 +135,7 @@
             <section class="map-stage">
                 <!-- Compass Rose Component -->
                 <div class="compass-station" id="compass-station">
-                    <svg width="80" height="80" viewBox="0 0 100 100" class="compass-svg" id="compass-rose-svg">
+                    <svg width="84" height="84" viewBox="0 0 100 100" class="compass-svg" id="compass-rose-svg">
                         <circle cx="50" cy="50" r="46" fill="none" stroke="var(--contour)" stroke-width="1.5"/>
                         <circle cx="50" cy="50" r="40" fill="none" stroke="var(--contour)" stroke-width="1" stroke-dasharray="2,2"/>
                         <text x="50" y="18" fill="var(--text-light)" font-family="var(--font-mono)" font-size="10" font-weight="bold" text-anchor="middle">N</text>
@@ -142,10 +152,26 @@
                     <span class="bearing-readout" id="bearing-readout">BEARING: 000° N</span>
                 </div>
 
-                <!-- Animated Route Line Overlay -->
+                <!-- Animated Route Line Overlay with Numbered Waypoint Pins -->
                 <div class="trail-route-layer">
                     <svg width="100%" height="100%" viewBox="0 0 800 240" preserveAspectRatio="none" class="route-svg">
                         <path id="animated-trail-path" d="M 60,180 Q 200,60 380,140 T 720,80" fill="none" stroke="var(--trail-copper)" stroke-width="3.5" stroke-dasharray="8 6" class="trail-line-path" />
+                        
+                        <!-- Numbered Waypoint Pins along the Trail -->
+                        <g id="waypoint-pins-group" class="pins-group">
+                            <g class="pin-node" transform="translate(100, 140)">
+                                <circle cx="0" cy="0" r="14" fill="var(--trail-copper)" stroke="var(--parchment)" stroke-width="2" />
+                                <text x="0" y="4" fill="var(--parchment)" font-family="var(--font-mono)" font-size="10" font-weight="bold" text-anchor="middle">01</text>
+                            </g>
+                            <g class="pin-node" transform="translate(380, 140)">
+                                <circle cx="0" cy="0" r="14" fill="var(--trail-copper)" stroke="var(--parchment)" stroke-width="2" />
+                                <text x="0" y="4" fill="var(--parchment)" font-family="var(--font-mono)" font-size="10" font-weight="bold" text-anchor="middle">02</text>
+                            </g>
+                            <g class="pin-node" transform="translate(660, 95)">
+                                <circle cx="0" cy="0" r="14" fill="var(--trail-copper)" stroke="var(--parchment)" stroke-width="2" />
+                                <text x="0" y="4" fill="var(--parchment)" font-family="var(--font-mono)" font-size="10" font-weight="bold" text-anchor="middle">03</text>
+                            </g>
+                        </g>
                     </svg>
                 </div>
 
