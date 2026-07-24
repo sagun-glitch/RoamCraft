@@ -71,8 +71,8 @@ app.post("/api/generate-itinerary", async (req, res) => {
       Format the output cleanly. For days, use "### Day X: Day Title" and for stops, use the "* HH:MM - Stop Name: Note" format precisely. Avoid raw HTML tags. Start directly with the itinerary introduction.
     `;
 
-    // Try primary recommended model gemini-1.5-flash with automatic fallbacks
-    const modelNames = ["gemini-1.5-flash", "gemini-2.0-flash-exp", "gemini-1.5-pro"];
+    // Active models verified for Google AI API
+    const modelNames = ["gemini-flash-latest", "gemini-flash-lite-latest", "gemini-2.0-flash"];
     let result = null;
     let lastErr = null;
 
