@@ -1,0 +1,85 @@
+# TripGuide AI ✈️
+
+TripGuide AI is a full-stack, containerized travel itinerary planner that uses artificial intelligence to generate beautiful, themed, day-by-day travel schedules.
+
+Designed with a custom **"Boarding Pass & Field Journal"** visual theme, this project is a departure from typical dark-mode SaaS dashboards, presenting plans as detailed physical travel tickets and diaries.
+
+---
+
+## ✨ Features
+
+- **Boarding Pass & Field Journal UI**: Travel-document aesthetic featuring ticket-stub columns, perforation seams/notches, and typewriter labels.
+- **Route Timelines**: Daily activities rendered as waypoints along a dotted path with red circle nodes.
+- **Progressive Stream Parsing**: Real-time markdown parser renders headings, bullet lists, and checklists progressively as Gemini streams the response.
+- **Interactive Checklists**: Interactive checkable items for packing guides and daily checklists.
+- **PDF & Print Exporter**: Print styles configured to preserve the layout, fonts, and timelines in print/PDF formats.
+- **Secure Architecture**: API keys are kept entirely on the server-side, preventing client-side credentials exposure.
+
+---
+
+## 🛠️ Tech Stack
+
+- **Frontend**: HTML5, Vanilla CSS3 (custom CSS variables, responsive grids), Vanilla JavaScript (native browser streams, DOM rendering).
+- **Backend**: Node.js, Express (SSE stream piping, static asset hosting).
+- **AI Model**: Google Gemini 2.5 Flash (`gemini-2.5-flash` model).
+- **Containerization**: Docker (multi-stage alpine build).
+- **Deployment**: Render.com (Docker Web Service runtime).
+
+---
+
+## 🚀 Getting Started
+
+### 1. Local Setup
+
+Make sure you have Node.js installed.
+
+1. Clone the repository:
+   ```bash
+   git clone https://github.com/aadi17-arch/tripguide.git
+   cd tripguide
+   ```
+
+2. Install dependencies:
+   ```bash
+   npm install
+   ```
+
+3. Create a `.env` file in the root folder and add your Google Gemini API key:
+   ```env
+   GEMINI_API_KEY=your_gemini_api_key_here
+   PORT=3000
+   ```
+
+4. Start the server:
+   ```bash
+   npm start
+   ```
+   Open [http://localhost:3000](http://localhost:3000) in your browser.
+
+---
+
+### 2. Docker Setup
+
+1. Build the Docker image:
+   ```bash
+   docker build -t tripguide .
+   ```
+
+2. Run the Docker container:
+   ```bash
+   docker run -d -p 3000:3000 -e GEMINI_API_KEY="your_api_key_here" tripguide
+   ```
+   Open [http://localhost:3000](http://localhost:3000) in your browser.
+
+---
+
+## 🌐 Cloud Deployment (Render.com)
+
+This application is optimized for deployment as a Docker Web Service on **Render**:
+
+1. Log in to [Render.com](https://render.com) using your GitHub account.
+2. Click **New +** -> **Web Service**.
+3. Connect your `tripguide` repository.
+4. Set the **Runtime** to **`Docker`** and select the **`Free`** plan.
+5. In the **Environment Variables** section, add your `GEMINI_API_KEY`.
+6. Click **Deploy Web Service**.

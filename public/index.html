@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>RoamCraft — Simple Trip Planner</title>
+    <meta name="description" content="Create custom travel itineraries in seconds.">
+    <!-- Google Fonts: Space Grotesk & IBM Plex Sans -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=IBM+Plex+Mono:wght@500;600&family=IBM+Plex+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+    <!-- Main Style -->
+    <link rel="stylesheet" href="style.css">
+    <!-- Lucide Icons -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+</head>
+<body>
+    <div class="app-layout">
+        <!-- Top Navigation -->
+        <header class="navbar">
+            <div class="nav-left">
+                <div class="brand-logo">
+                    <i data-lucide="map-pin" class="brand-icon"></i>
+                    <span class="brand-name">Roam<span class="brand-accent">Craft</span></span>
+                    <span class="brand-tag">TRAVEL</span>
+                </div>
+            </div>
+            <div class="nav-right">
+                <span id="status-text" class="status-badge">Ready to plan your trip</span>
+                <button id="copy-btn" class="nav-action-btn" title="Copy Itinerary" disabled>
+                    <i data-lucide="copy"></i>
+                    <span>Copy</span>
+                </button>
+                <button id="print-btn" class="nav-action-btn" title="Print Itinerary" disabled>
+                    <i data-lucide="printer"></i>
+                    <span>Print</span>
+                </button>
+            </div>
+        </header>
+
+        <!-- Top Hero Planner Deck (Form Bar) -->
+        <section class="planner-hero">
+            <div class="hero-intro">
+                <h2>Where would you like to go?</h2>
+                <p>Pick a destination and preferences to create your day-by-day travel plan.</p>
+            </div>
+
+            <form id="itinerary-form" class="planner-form">
+                <div class="form-grid">
+                    <!-- Where to -->
+                    <div class="form-card">
+                        <label for="destination"><i data-lucide="compass"></i> WHERE ARE YOU GOING?</label>
+                        <input type="text" id="destination" name="destination" placeholder="e.g. Rome, Tokyo, London, Bali" required>
+                    </div>
+
+                    <!-- How many days -->
+                    <div class="form-card">
+                        <label for="days"><i data-lucide="calendar"></i> HOW MANY DAYS?</label>
+                        <input type="number" id="days" name="days" min="1" max="14" value="3" required>
+                    </div>
+
+                    <!-- Budget -->
+                    <div class="form-card">
+                        <label for="budget"><i data-lucide="dollar-sign"></i> BUDGET</label>
+                        <select id="budget" name="budget">
+                            <option value="Budget">Budget-friendly</option>
+                            <option value="Moderate" selected>Moderate</option>
+                            <option value="Luxury">Luxury / High-end</option>
+                        </select>
+                    </div>
+
+                    <!-- Interests -->
+                    <div class="form-card form-card-wide">
+                        <label for="interests"><i data-lucide="sparkles"></i> WHAT DO YOU LIKE TO DO?</label>
+                        <input type="text" id="interests" name="interests" placeholder="e.g. food tours, historical places, beaches, hiking">
+                    </div>
+                </div>
+
+                <div class="form-actions-bar">
+                    <button type="submit" id="submit-btn" class="btn btn-primary">
+                        <i data-lucide="send"></i>
+                        <span>Generate My Trip</span>
+                    </button>
+                    <button type="button" id="reset-btn" class="btn btn-secondary">
+                        <i data-lucide="rotate-ccw"></i>
+                        <span>Reset</span>
+                    </button>
+                </div>
+            </form>
+        </section>
+
+        <!-- Main Display Deck -->
+        <main class="content-deck">
+            <!-- Left Main Column: Itinerary Output -->
+            <section class="main-column">
+                <!-- Empty State -->
+                <div id="empty-state" class="empty-state">
+                    <div class="empty-card">
+                        <i data-lucide="map" class="empty-icon"></i>
+                        <h3>Your travel plan will appear here</h3>
+                        <p>Fill out the form above and click <strong>Generate My Trip</strong> to see your day-by-day itinerary.</p>
+                    </div>
+                </div>
+
+                <!-- Stream Output Container -->
+                <div id="itinerary-output" class="itinerary-output hidden"></div>
+
+                <!-- Error Container -->
+                <div id="error-container" class="error-container hidden">
+                    <i data-lucide="alert-circle" class="error-icon"></i>
+                    <div class="error-message">
+                        <h4>Unable to generate plan</h4>
+                        <p id="error-text">An error occurred. Please try again.</p>
+                    </div>
+                </div>
+
+                <!-- Loader -->
+                <div id="loader" class="loader hidden">
+                    <div class="spinner"></div>
+                    <span>Planning your custom trip...</span>
+                </div>
+            </section>
+
+            <!-- Right Sidebar / Stamp & Summary Deck -->
+            <aside class="sidebar-column">
+                <!-- Postmark Stamp Element -->
+                <div id="postmark-stamp" class="stamp-card hidden">
+                    <div class="stamp-header">VERIFIED TRIP</div>
+                    <svg width="120" height="120" viewBox="0 0 110 110" class="stamp-svg">
+                        <circle cx="55" cy="55" r="48" fill="none" stroke="var(--accent)" stroke-width="2" />
+                        <circle cx="55" cy="55" r="42" fill="none" stroke="var(--accent)" stroke-width="1.5" stroke-dasharray="3,3" />
+                        <path id="curve-top" d="M 18,55 A 37,37 0 0 1 92,55" fill="none" />
+                        <path id="curve-bottom" d="M 92,55 A 37,37 0 0 1 18,55" fill="none" />
+                        <text fill="var(--accent)" font-family="var(--font-mono)" font-size="7" font-weight="bold" letter-spacing="1">
+                            <textPath href="#curve-top" startOffset="50%" text-anchor="middle" id="stamp-destination">ROME</textPath>
+                        </text>
+                        <text fill="var(--accent)" font-family="var(--font-mono)" font-size="7" font-weight="bold" letter-spacing="1.5">
+                            <textPath href="#curve-bottom" startOffset="50%" text-anchor="middle">ROAMCRAFT</textPath>
+                        </text>
+                        <line x1="55" y1="42" x2="55" y2="68" stroke="var(--accent)" stroke-width="2" />
+                        <polygon points="55,38 52,44 58,44" fill="var(--accent)" />
+                        <polygon points="55,72 52,66 58,66" fill="var(--accent)" />
+                        <circle cx="55" cy="55" r="2" fill="var(--accent)" />
+                    </svg>
+                </div>
+
+                <!-- Info Card -->
+                <div class="info-card">
+                    <h4><i data-lucide="lightbulb"></i> Handy Tips</h4>
+                    <ul>
+                        <li>Save offline maps of your destination before leaving.</li>
+                        <li>Carry a portable power bank for daytime sightseeing.</li>
+                        <li>Try local street food spots recommended by locals.</li>
+                    </ul>
+                </div>
+            </aside>
+        </main>
+
+        <!-- Footer -->
+        <footer class="app-footer">
+            <p>&copy; 2026 RoamCraft. Simple & custom trip planning.</p>
+        </footer>
+    </div>
+
+    <!-- App Script -->
+    <script src="app.js"></script>
+    <script>
+        // Initialize Icons
+        lucide.createIcons();
+    </script>
+</body>
+</html>
