@@ -7,12 +7,12 @@
     <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@600;700&family=IBM+Plex+Mono:wght@500;600&family=IBM+Plex+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@600;700;800&family=JetBrains+Mono:wght@500;600&display=swap" rel="stylesheet">
     <style>
         :root {
-            --primary: #E05638;
-            --primary-dark: #B83A1F;
-            --dark: #141312;
+            --primary: #6366F1;
+            --primary-dark: #4F46E5;
+            --dark: #0F131D;
             --text: #334155;
             --border: #e2e8f0;
             --bg-subtle: #f8fafc;
@@ -25,7 +25,7 @@
         }
 
         body {
-            font-family: 'IBM Plex Sans', system-ui, -apple-system, sans-serif;
+            font-family: 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif;
             color: var(--text);
             line-height: 1.6;
             padding: 3rem 4rem;
@@ -45,9 +45,8 @@
         }
 
         .title-group h1 {
-            font-family: 'Space Grotesk', sans-serif;
             font-size: 2.35rem;
-            font-weight: 700;
+            font-weight: 800;
             color: var(--dark);
             letter-spacing: -0.02em;
         }
@@ -63,7 +62,7 @@
         }
 
         .doc-meta {
-            font-family: 'IBM Plex Mono', monospace;
+            font-family: 'JetBrains Mono', monospace;
             font-size: 0.8rem;
             color: #64748b;
             text-align: right;
@@ -71,12 +70,12 @@
 
         /* Live Badge Box */
         .live-link-box {
-            background-color: #fff7ed;
+            background-color: #eef2ff;
             border: 2px solid var(--primary);
             border-radius: 8px;
             padding: 1.1rem 1.35rem;
             margin: 1.5rem 0 2rem;
-            font-family: 'IBM Plex Mono', monospace;
+            font-family: 'JetBrains Mono', monospace;
             font-size: 0.9rem;
             color: var(--dark);
         }
@@ -89,8 +88,8 @@
 
         /* Headings */
         h2 {
-            font-family: 'Space Grotesk', sans-serif;
             font-size: 1.4rem;
+            font-weight: 700;
             color: var(--dark);
             border-bottom: 1px solid var(--border);
             padding-bottom: 0.4rem;
@@ -99,8 +98,8 @@
         }
 
         h3 {
-            font-family: 'Space Grotesk', sans-serif;
             font-size: 1.1rem;
+            font-weight: 700;
             color: var(--primary-dark);
             margin-top: 1.25rem;
             margin-bottom: 0.5rem;
@@ -144,16 +143,15 @@
 
         th {
             background-color: var(--bg-subtle);
-            font-family: 'Space Grotesk', sans-serif;
-            font-weight: 600;
+            font-weight: 700;
             color: var(--dark);
         }
 
         /* Code & Pre */
         pre {
-            background-color: #18181b;
+            background-color: #0f172a;
             color: #f8fafc;
-            font-family: 'IBM Plex Mono', monospace;
+            font-family: 'JetBrains Mono', monospace;
             font-size: 0.83rem;
             padding: 1.1rem;
             border-radius: 8px;
@@ -163,7 +161,7 @@
         }
 
         code {
-            font-family: 'IBM Plex Mono', monospace;
+            font-family: 'JetBrains Mono', monospace;
             font-size: 0.86rem;
             background-color: #f1f5f9;
             color: var(--primary-dark);
@@ -192,10 +190,10 @@
     <div class="doc-header">
         <div class="title-group">
             <h1>Roam<span>Craft</span></h1>
-            <p>Simple AI-Powered Travel Itinerary Generator — Project Specification</p>
+            <p>Smart AI-Powered Travel Dispatch Engine — Project Specification</p>
         </div>
         <div class="doc-meta">
-            <strong>VERSION 1.0</strong><br>
+            <strong>VERSION 2.0</strong><br>
             July 2026
         </div>
     </div>
@@ -206,15 +204,15 @@
     </div>
 
     <h2>1. Executive Summary</h2>
-    <p><strong>RoamCraft</strong> is a lightweight, AI-driven vacation planning platform built with <strong>Node.js, Express, and Google Gemini 2.5 Flash</strong>. It generates comprehensive, day-by-day travel itineraries delivered via <strong>Server-Sent Events (SSE)</strong> real-time streaming based on user destination, duration, budget tier, and custom activity preferences.</p>
+    <p><strong>RoamCraft</strong> is an AI-driven vacation planning platform built with <strong>Node.js, Express, and Google Gemini</strong>. Featuring a <strong>Sidebar Navigation Dispatch Studio UI</strong>, it streams personalized day-by-day itineraries live via <strong>Server-Sent Events (SSE)</strong> based on user destination, duration, budget tier, and custom activity preferences.</p>
 
     <h2>2. Key Highlights & Features</h2>
     <ul>
+        <li><strong>Sidebar Navigation Studio Layout</strong>: Redesigned with a dedicated left navigation sidebar deck, main workspace area, and auxiliary stamp verification panel.</li>
         <li><strong>Real-Time AI Streaming</strong>: Delivers instant markdown-formatted itinerary updates chunk-by-chunk using Server-Sent Events (SSE) without long loading delays.</li>
-        <li><strong>Precision Personalization</strong>: Tailors daily itineraries based on budget tier (Budget-friendly, Moderate, Luxury) and custom interest preferences (e.g. food tours, historical places, beaches, hiking).</li>
+        <li><strong>Precision Personalization</strong>: Tailors daily itineraries based on budget tier (Budget-friendly, Moderate, Luxury) and custom interest preferences.</li>
         <li><strong>Interactive Day-by-Day Dashboard</strong>: Renders structured day blocks with morning/afternoon/evening schedules, interactive packing checkboxes, and local travel tips.</li>
-        <li><strong>One-Click Export & Printing</strong>: Integrated print/PDF engine formats custom itineraries into clean, styled documents.</li>
-        <li><strong>Scandinavian Terracotta Sand Theme</strong>: High-contrast, clean UI designed for maximum readability without gradients or glassmorphism.</li>
+        <li><strong>Nordic Midnight & Indigo Theme</strong>: High-contrast, clean UI built with Plus Jakarta Sans & JetBrains Mono fonts—strictly NO gradients and NO glassmorphism.</li>
     </ul>
 
     <h2>3. Technical Stack & Architecture</h2>
@@ -239,13 +237,13 @@
             </tr>
             <tr>
                 <td><strong>Generative AI</strong></td>
-                <td>Google Gemini 2.5 Flash</td>
+                <td>Google Gemini API</td>
                 <td>High-speed generative AI model configured for structured streaming output</td>
             </tr>
             <tr>
                 <td><strong>Frontend UI</strong></td>
                 <td>HTML5 / Vanilla CSS / ES6+ JS</td>
-                <td>Dashboard interface built with Space Grotesk & IBM Plex fonts, and Lucide Icons</td>
+                <td>Dispatch Studio interface built with Plus Jakarta Sans & JetBrains Mono fonts, and Lucide Icons</td>
             </tr>
             <tr>
                 <td><strong>Streaming Protocol</strong></td>
@@ -259,10 +257,10 @@
     <h3>POST <code>/api/generate-itinerary</code></h3>
     <p><strong>Request Payload (JSON):</strong></p>
 <pre><code>{
-  "destination": "Rome, Italy",
+  "destination": "Kyoto, Japan",
   "days": 3,
   "budget": "Moderate",
-  "interests": "historic ruins, authentic pasta, neighborhood walks"
+  "interests": "temples, tea houses, ramen"
 }</code></pre>
 
     <h2>5. Local Development & Deployment</h2>
