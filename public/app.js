@@ -169,7 +169,7 @@ document.addEventListener("DOMContentLoaded", () => {
         outputContainer.classList.add("hidden");
         postmarkStamp.classList.add("hidden");
         const trailRouteLayer = document.getElementById("trail-route-layer");
-        if (trailRouteLayer) trailRouteLayer.classList.remove("hidden");
+        if (trailRouteLayer) trailRouteLayer.classList.add("hidden");
         outputContainer.innerHTML = "";
         loader.classList.remove("hidden");
         submitBtn.disabled = true;
@@ -216,6 +216,10 @@ document.addEventListener("DOMContentLoaded", () => {
                 for (const line of lines) {
                     const cleanLine = line.trim();
                     if (!cleanLine.startsWith("data: ")) continue;
+
+                    // Unhide route line and hide loader as soon as stream data arrives
+                    loader.classList.add("hidden");
+                    if (trailRouteLayer) trailRouteLayer.classList.remove("hidden");
 
                     const dataStr = cleanLine.substring(6);
                     if (dataStr === "[DONE]") {
