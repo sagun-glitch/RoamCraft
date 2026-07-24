@@ -655,9 +655,38 @@ body {
     line-height: 1.55;
 }
 
+/* All Section Titles & Cards outside .day-block wrapped in Parchment Cards */
+.itinerary-output > h3:not(.day-title) {
+    font-family: var(--font-display);
+    font-size: 1.25rem;
+    font-weight: 800;
+    color: var(--text-dark);
+    background-color: var(--parchment);
+    border-left: 2px solid var(--contour);
+    border-right: 2px solid var(--contour);
+    border-top: 2px solid var(--contour);
+    border-bottom: 1px dashed var(--contour);
+    border-radius: var(--radius-md) var(--radius-md) 0 0;
+    padding: 1.25rem 1.6rem 0.6rem 1.6rem;
+    margin-top: 1.5rem;
+    margin-bottom: 0;
+    box-shadow: 5px 5px 0px #0D1510;
+}
+
+.itinerary-output > ul, .itinerary-output > p, .itinerary-output > ol {
+    background-color: var(--parchment);
+    color: var(--text-dark);
+    border-left: 2px solid var(--contour);
+    border-right: 2px solid var(--contour);
+    border-bottom: 2px solid var(--contour);
+    border-radius: 0 0 var(--radius-md) var(--radius-md);
+    padding: 0.85rem 1.6rem 1.35rem 2.2rem;
+    margin-bottom: 1.5rem;
+    box-shadow: 5px 5px 0px #0D1510;
+}
+
 .itinerary-output ul.checklist {
     list-style: none;
-    margin-top: 0.5rem;
 }
 
 .itinerary-output ul.checklist li {
@@ -667,42 +696,27 @@ body {
     font-family: var(--font-mono);
     font-size: 0.88rem;
     color: var(--text-dark);
-    margin-bottom: 0.45rem;
+    margin-bottom: 0.5rem;
 }
 
 .itinerary-output ul.checklist input[type="checkbox"] {
     accent-color: var(--trail-copper);
     cursor: pointer;
-}
-
-.itinerary-output ul:not(.checklist) {
-    list-style: none;
-    padding-left: 1rem;
-    margin-top: 0.5rem;
+    width: 1.05rem;
+    height: 1.05rem;
 }
 
 .itinerary-output ul:not(.checklist) li {
     font-family: var(--font-mono);
     font-size: 0.88rem;
     color: var(--text-dark);
-    margin-bottom: 0.4rem;
+    margin-bottom: 0.45rem;
 }
 
 .itinerary-output hr {
     border: none;
     border-top: 2px dashed var(--contour);
     margin: 1.25rem 0;
-}
-
-.itinerary-output h3:not(.day-title) {
-    font-family: var(--font-display);
-    font-size: 1.18rem;
-    font-weight: 800;
-    color: var(--text-dark);
-    border-top: 2px solid var(--contour);
-    padding-top: 0.85rem;
-    margin-top: 1.25rem;
-    margin-bottom: 0.5rem;
 }
 
 .permit-postmark-card {
