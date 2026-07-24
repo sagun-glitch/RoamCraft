@@ -3,8 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>RoamCraft — Digital Expedition Dossier</title>
-    <meta name="description" content="A field cartographer's trail map and expedition dossier for custom travel planning.">
+    <title>RoamCraft — Easy Trip Planner</title>
+    <meta name="description" content="Create custom day-by-day travel itineraries in seconds.">
     <!-- Google Fonts: Space Grotesk, IBM Plex Mono, Caveat -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -38,23 +38,23 @@
             <div class="permit-card">
                 <!-- Permit Header Stamp -->
                 <div class="permit-header">
-                    <div class="permit-badge">OFFICIAL PERMIT #884-R</div>
+                    <div class="permit-badge">EASY TRIP PLANNER</div>
                     <h1 class="permit-title">ROAMCRAFT</h1>
-                    <p class="permit-subtitle">FIELD CARTOGRAPHER'S TRAIL REGISTRATION</p>
+                    <p class="permit-subtitle">CREATE YOUR DAY-BY-DAY TRAVEL PLAN</p>
                 </div>
 
                 <form id="itinerary-form" class="permit-form">
                     <!-- Field 1: Destination -->
                     <div class="permit-field">
-                        <label for="destination">01. TARGET EXPEDITION DESTINATION</label>
+                        <label for="destination">01. WHERE ARE YOU GOING?</label>
                         <div class="input-slot">
-                            <input type="text" id="destination" name="destination" placeholder="e.g. Kyoto, Iceland, Patagonia, Rome" required>
+                            <input type="text" id="destination" name="destination" placeholder="e.g. Kyoto, Tokyo, Paris, Rome" required>
                         </div>
                     </div>
 
                     <!-- Field 2: Duration / Days -->
                     <div class="permit-field">
-                        <label for="days">02. TRAIL DURATION (WAYPOINT DAYS)</label>
+                        <label for="days">02. HOW MANY DAYS?</label>
                         <div class="input-slot">
                             <input type="number" id="days" name="days" min="1" max="14" value="3" required>
                         </div>
@@ -62,21 +62,21 @@
 
                     <!-- Field 3: Budget Level -->
                     <div class="permit-field">
-                        <label for="budget">03. EXPEDITION RATION & BUDGET</label>
+                        <label for="budget">03. BUDGET LEVEL</label>
                         <div class="input-slot">
                             <select id="budget" name="budget">
-                                <option value="Budget">Backpacker / Budget</option>
-                                <option value="Moderate" selected>Standard Trek / Moderate</option>
-                                <option value="Luxury">Expedition Luxe / High-End</option>
+                                <option value="Budget">Budget-friendly</option>
+                                <option value="Moderate" selected>Moderate</option>
+                                <option value="Luxury">Luxury / High-end</option>
                             </select>
                         </div>
                     </div>
 
                     <!-- Field 4: Interests & Vibe -->
                     <div class="permit-field">
-                        <label for="interests">04. SPECIAL SURVEY INTERESTS</label>
+                        <label for="interests">04. WHAT DO YOU LIKE TO DO?</label>
                         <div class="input-slot">
-                            <input type="text" id="interests" name="interests" placeholder="e.g. alpine views, local food, ancient ruins, cafes">
+                            <input type="text" id="interests" name="interests" placeholder="e.g. local food, museums, cafes, historic sights">
                         </div>
                     </div>
 
@@ -84,9 +84,9 @@
                     <div class="permit-actions">
                         <button type="submit" id="submit-btn" class="stamp-btn">
                             <i data-lucide="compass"></i>
-                            <span>CHART TRAIL ROUTE</span>
+                            <span>CREATE TRIP PLAN</span>
                         </button>
-                        <button type="button" id="reset-btn" class="reset-permit-btn" title="Reset Permit">
+                        <button type="button" id="reset-btn" class="reset-permit-btn" title="Reset Form">
                             <i data-lucide="rotate-ccw"></i>
                         </button>
                     </div>
@@ -94,7 +94,7 @@
 
                 <!-- Field Notes Margin -->
                 <div class="field-margin-note">
-                    <p class="handwritten">"Ensure water supply & trail maps are checked before departure."</p>
+                    <p class="handwritten">"Pick a destination, duration & preferences to build your custom trip plan."</p>
                 </div>
             </div>
         </aside>
@@ -104,19 +104,19 @@
             <!-- Top Chart Header & Compass Station -->
             <header class="chart-header">
                 <div class="chart-meta">
-                    <span class="grid-coord">GRID REF: 45°12'N 122°45'W</span>
-                    <h2 class="chart-heading">TOPOGRAPHIC ROUTE SURVEY</h2>
+                    <span class="grid-coord">AI TRAVEL PLANNER</span>
+                    <h2 class="chart-heading">YOUR DAY-BY-DAY ITINERARY</h2>
                 </div>
 
                 <div class="canvas-actions-bar">
-                    <span id="status-text" class="status-indicator-tag">Map Idle</span>
-                    <button id="copy-btn" class="canvas-btn" title="Copy Route Logs" disabled>
+                    <span id="status-text" class="status-indicator-tag">Ready</span>
+                    <button id="copy-btn" class="canvas-btn" title="Copy Plan" disabled>
                         <i data-lucide="copy"></i>
-                        <span>Copy Logs</span>
+                        <span>Copy Plan</span>
                     </button>
-                    <button id="print-btn" class="canvas-btn canvas-btn-accent" title="Print Field Report" disabled>
+                    <button id="print-btn" class="canvas-btn canvas-btn-accent" title="Export PDF" disabled>
                         <i data-lucide="printer"></i>
-                        <span>Export Report</span>
+                        <span>Export PDF</span>
                     </button>
                 </div>
             </header>
@@ -142,7 +142,7 @@
                     <span class="bearing-readout" id="bearing-readout">BEARING: 000° N</span>
                 </div>
 
-                <!-- Animated Route Line Overlay (Interactive Canvas Visual) -->
+                <!-- Animated Route Line Overlay -->
                 <div class="trail-route-layer">
                     <svg width="100%" height="100%" viewBox="0 0 800 240" preserveAspectRatio="none" class="route-svg">
                         <path id="animated-trail-path" d="M 60,180 Q 200,60 380,140 T 720,80" fill="none" stroke="var(--trail-copper)" stroke-width="3.5" stroke-dasharray="8 6" class="trail-line-path" />
@@ -154,22 +154,22 @@
                     <div class="empty-compass-box">
                         <i data-lucide="map-pin" class="empty-pin-icon"></i>
                     </div>
-                    <h3>NO ROUTE CHARTED YET</h3>
-                    <p>Enter your expedition details on the Trail Permit to plot numbered waypoint pins across the map.</p>
+                    <h3>YOUR TRAVEL PLAN WILL APPEAR HERE</h3>
+                    <p>Fill out the quick form on the left and click Create Trip Plan to generate your daily itinerary.</p>
                 </div>
 
                 <!-- Stream Loader -->
                 <div id="loader" class="route-loader hidden">
                     <div class="loader-compass-spinner"></div>
-                    <span>Drawing trail route & compiling field logs...</span>
+                    <span>Building your personalized trip plan...</span>
                 </div>
 
                 <!-- Error Box -->
                 <div id="error-container" class="route-error hidden">
                     <i data-lucide="alert-triangle"></i>
                     <div class="error-text-wrap">
-                        <h4>Chart Plotter Error</h4>
-                        <p id="error-text">Failed to plot trail route.</p>
+                        <h4>Unable to generate plan</h4>
+                        <p id="error-text">Failed to generate itinerary. Please try again.</p>
                     </div>
                 </div>
             </section>
@@ -181,14 +181,14 @@
 
                 <!-- Verified Permit Postmark Badge -->
                 <div id="postmark-stamp" class="permit-postmark-card hidden">
-                    <div class="stamp-header-text">VERIFIED TRAIL PERMIT</div>
+                    <div class="stamp-header-text">ROAMCRAFT VERIFIED</div>
                     <svg width="90" height="90" viewBox="0 0 110 110" class="stamp-svg">
                         <circle cx="55" cy="55" r="48" fill="none" stroke="var(--trail-copper)" stroke-width="2" />
                         <circle cx="55" cy="55" r="42" fill="none" stroke="var(--trail-copper)" stroke-width="1.5" stroke-dasharray="3,3" />
                         <path id="curve-top" d="M 18,55 A 37,37 0 0 1 92,55" fill="none" />
                         <path id="curve-bottom" d="M 92,55 A 37,37 0 0 1 18,55" fill="none" />
                         <text fill="var(--trail-copper)" font-family="var(--font-mono)" font-size="7" font-weight="bold" letter-spacing="1">
-                            <textPath href="#curve-top" startOffset="50%" text-anchor="middle" id="stamp-destination">EXPEDITION</textPath>
+                            <textPath href="#curve-top" startOffset="50%" text-anchor="middle" id="stamp-destination">DESTINATION</textPath>
                         </text>
                         <text fill="var(--trail-copper)" font-family="var(--font-mono)" font-size="7" font-weight="bold" letter-spacing="1.5">
                             <textPath href="#curve-bottom" startOffset="50%" text-anchor="middle">ROAMCRAFT</textPath>
@@ -219,7 +219,6 @@
             form.addEventListener('submit', () => {
                 const dest = (destinationInput ? destinationInput.value : '').trim();
                 if (dest) {
-                    // Generate deterministic bearing from string hash (0° to 359°)
                     let hash = 0;
                     for (let i = 0; i < dest.length; i++) {
                         hash = dest.charCodeAt(i) + ((hash << 5) - hash);
