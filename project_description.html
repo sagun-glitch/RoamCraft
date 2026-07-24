@@ -4,19 +4,24 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>RoamCraft — Digital Expedition Dossier Specification</title>
-    <!-- Google Fonts -->
+    <!-- Google Fonts: Space Grotesk, IBM Plex Mono, Caveat -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@600;700&family=IBM+Plex+Mono:wght@500;600&family=Space+Grotesk:wght@600;700;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@600;700&family=IBM+Plex+Mono:ital,wght@0,400;0,500;0,600;1,400&family=Space+Grotesk:wght@600;700;800&display=swap" rel="stylesheet">
     <style>
         :root {
-            --map-ink: #1B2A22;
-            --parchment: #E8DCC0;
-            --contour: #C9B98C;
-            --trail-copper: #B5622E;
-            --sky-teal: #3E8C82;
-            --text-dark: #1B2A22;
-            --text-light: #EFE9D8;
+            --map-ink: #1B2A22;          /* Deep pine, page background */
+            --parchment: #E8DCC0;        /* Aged panel / card background */
+            --parchment-inset: #DFCFAC;  /* Inset field background */
+            --contour: #C9B98C;          /* Thin hairline contour rules/dividers */
+            --trail-copper: #B5622E;     /* Route line, primary accent, pins */
+            --sky-teal: #3E8C82;         /* Secondary accent — status, links */
+            --text-dark: #1B2A22;        /* On parchment */
+            --text-light: #EFE9D8;       /* On pine */
+
+            --font-display: 'Space Grotesk', system-ui, sans-serif;
+            --font-mono: 'IBM Plex Mono', monospace;
+            --font-hand: 'Caveat', cursive;
         }
 
         * {
@@ -26,31 +31,54 @@
         }
 
         body {
-            font-family: 'IBM Plex Mono', monospace;
-            color: var(--text-dark);
-            background-color: #FFFFFF;
-            line-height: 1.6;
-            padding: 3rem 4rem;
-            max-width: 900px;
+            background-color: var(--map-ink);
+            color: var(--text-light);
+            font-family: var(--font-mono);
+            padding: 2.5rem 3rem;
+            max-width: 960px;
             margin: 0 auto;
+            position: relative;
+        }
+
+        /* Topographic SVG Pattern Background */
+        .topo-bg {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 0;
+            opacity: 0.3;
+        }
+
+        .doc-wrapper {
+            position: relative;
+            z-index: 1;
+            background-color: var(--parchment);
+            color: var(--text-dark);
+            border: 2.5px solid var(--contour);
+            border-radius: 10px;
+            padding: 2.5rem;
+            box-shadow: 8px 8px 0px #0D1510;
         }
 
         /* Header */
         .doc-header {
-            border-bottom: 3px solid var(--trail-copper);
-            padding-bottom: 1.5rem;
-            margin-bottom: 2rem;
+            border-bottom: 2px dashed var(--contour);
+            padding-bottom: 1.25rem;
+            margin-bottom: 1.75rem;
             display: flex;
             justify-content: space-between;
             align-items: flex-end;
         }
 
         .title-group h1 {
-            font-family: 'Space Grotesk', sans-serif;
-            font-size: 2.35rem;
+            font-family: var(--font-display);
+            font-size: 2.2rem;
             font-weight: 800;
-            color: var(--map-ink);
-            letter-spacing: -0.02em;
+            color: var(--text-dark);
+            letter-spacing: 0.04em;
         }
 
         .title-group h1 span {
@@ -58,28 +86,31 @@
         }
 
         .title-group p {
-            font-size: 0.95rem;
-            color: #64748b;
+            font-family: var(--font-mono);
+            font-size: 0.85rem;
+            color: var(--sky-teal);
             margin-top: 0.25rem;
+            font-weight: 600;
         }
 
         .doc-meta {
-            font-family: 'IBM Plex Mono', monospace;
-            font-size: 0.8rem;
-            color: #64748b;
+            font-family: var(--font-mono);
+            font-size: 0.78rem;
+            color: var(--trail-copper);
             text-align: right;
+            font-weight: 600;
         }
 
         /* Live Badge Box */
         .live-link-box {
-            background-color: #fdf8ee;
-            border: 2px solid var(--trail-copper);
-            border-radius: 8px;
+            background-color: var(--parchment-inset);
+            border: 2px solid var(--contour);
+            border-radius: 6px;
             padding: 1.1rem 1.35rem;
             margin: 1.5rem 0 2rem;
-            font-family: 'IBM Plex Mono', monospace;
-            font-size: 0.9rem;
-            color: var(--map-ink);
+            font-family: var(--font-mono);
+            font-size: 0.88rem;
+            color: var(--text-dark);
         }
 
         .live-link-box a {
@@ -90,18 +121,19 @@
 
         /* Headings */
         h2 {
-            font-family: 'Space Grotesk', sans-serif;
-            font-size: 1.4rem;
-            font-weight: 700;
-            color: var(--map-ink);
-            border-bottom: 1px solid var(--contour);
+            font-family: var(--font-display);
+            font-size: 1.35rem;
+            font-weight: 800;
+            color: var(--text-dark);
+            border-bottom: 2px solid var(--contour);
             padding-bottom: 0.4rem;
             margin-top: 2rem;
             margin-bottom: 1rem;
+            letter-spacing: 0.03em;
         }
 
         h3 {
-            font-family: 'Space Grotesk', sans-serif;
+            font-family: var(--font-display);
             font-size: 1.1rem;
             font-weight: 700;
             color: var(--trail-copper);
@@ -110,9 +142,10 @@
         }
 
         p {
-            font-size: 0.94rem;
-            color: #334155;
+            font-size: 0.92rem;
+            color: var(--text-dark);
             margin-bottom: 1rem;
+            line-height: 1.55;
         }
 
         /* Lists */
@@ -122,13 +155,13 @@
         }
 
         li {
-            font-size: 0.92rem;
-            color: #334155;
+            font-size: 0.9rem;
+            color: var(--text-dark);
             margin-bottom: 0.45rem;
         }
 
         li strong {
-            color: var(--map-ink);
+            color: var(--trail-copper);
         }
 
         /* Table */
@@ -136,7 +169,7 @@
             width: 100%;
             border-collapse: collapse;
             margin: 1.25rem 0;
-            font-size: 0.9rem;
+            font-size: 0.88rem;
         }
 
         th, td {
@@ -146,43 +179,61 @@
         }
 
         th {
-            background-color: #f7f3e8;
-            font-family: 'Space Grotesk', sans-serif;
+            background-color: var(--parchment-inset);
+            font-family: var(--font-display);
             font-weight: 700;
-            color: var(--map-ink);
+            color: var(--text-dark);
         }
 
         /* Code & Pre */
         pre {
             background-color: var(--map-ink);
             color: var(--text-light);
-            font-family: 'IBM Plex Mono', monospace;
+            font-family: var(--font-mono);
             font-size: 0.83rem;
             padding: 1.1rem;
-            border-radius: 8px;
+            border-radius: 6px;
             overflow-x: auto;
             margin: 1.25rem 0;
             line-height: 1.5;
+            border: 1.5px solid var(--contour);
         }
 
         code {
-            font-family: 'IBM Plex Mono', monospace;
+            font-family: var(--font-mono);
             font-size: 0.86rem;
-            background-color: #f1f5f9;
+            background-color: var(--parchment-inset);
             color: var(--trail-copper);
             padding: 0.15rem 0.4rem;
             border-radius: 4px;
+            font-weight: 600;
         }
 
         pre code {
             background-color: transparent;
             color: inherit;
             padding: 0;
+            font-weight: normal;
+        }
+
+        .handwritten-note {
+            font-family: var(--font-hand);
+            font-size: 1.45rem;
+            color: var(--trail-copper);
+            margin-top: 2rem;
+            text-align: center;
+            transform: rotate(-1deg);
         }
 
         /* Print Media */
         @media print {
             body {
+                background-color: #ffffff;
+                padding: 0;
+            }
+            .doc-wrapper {
+                box-shadow: none;
+                border: none;
                 padding: 0;
             }
             .no-print {
@@ -192,74 +243,75 @@
     </style>
 </head>
 <body>
-    <div class="doc-header">
-        <div class="title-group">
-            <h1>Roam<span>Craft</span></h1>
-            <p>Digital Expedition Dossier — Technical Specification</p>
+    <div class="doc-wrapper">
+        <div class="doc-header">
+            <div class="title-group">
+                <h1>ROAM<span>CRAFT</span></h1>
+                <p>DIGITAL EXPEDITION DOSSIER & SPECIFICATION</p>
+            </div>
+            <div class="doc-meta">
+                <strong>OFFICIAL PERMIT #884-R</strong><br>
+                July 2026
+            </div>
         </div>
-        <div class="doc-meta">
-            <strong>VERSION 4.0</strong><br>
-            July 2026
+
+        <div class="live-link-box">
+            <strong>🌐 Live Web Application:</strong> <a href="https://roamcraft.onrender.com" target="_blank">https://roamcraft.onrender.com</a><br>
+            <strong>📦 GitHub Repository:</strong> <a href="https://github.com/sagun-glitch/RoamCraft" target="_blank">https://github.com/sagun-glitch/RoamCraft</a>
         </div>
-    </div>
 
-    <div class="live-link-box">
-        <strong>🌐 Live Web Application:</strong> <a href="https://roamcraft.onrender.com" target="_blank">https://roamcraft.onrender.com</a><br>
-        <strong>📦 GitHub Repository:</strong> <a href="https://github.com/sagun-glitch/RoamCraft" target="_blank">https://github.com/sagun-glitch/RoamCraft</a>
-    </div>
+        <h2>1. Executive Summary</h2>
+        <p><strong>RoamCraft</strong> is an AI-powered vacation planning platform designed as a digital expedition dossier and field cartographer's trail map. Built with <strong>Node.js, Express, and Google Gemini</strong>, it streams personalized day-by-day itineraries live via <strong>Server-Sent Events (SSE)</strong> across a topographic contour-line canvas with live compass bearing calculations.</p>
 
-    <h2>1. Executive Summary</h2>
-    <p><strong>RoamCraft</strong> is designed as a digital expedition dossier and field cartographer's trail map. Built with <strong>Node.js, Express, and Google Gemini</strong>, it streams personalized day-by-day itineraries live via <strong>Server-Sent Events (SSE)</strong> rendered across a topographic contour-line canvas with live compass bearing calculations.</p>
+        <h2>2. Design Tokens & Metaphor</h2>
+        <ul>
+            <li><strong>Trail Permit Panel</strong>: Left registration card styled on aged parchment (<code>#E8DCC0</code>) with stamped toggle controls and handwritten field margin notes.</li>
+            <li><strong>Topographic Map Canvas</strong>: Deep pine (<code>#1B2A22</code>) page background with SVG contour hairline rules (<code>#C9B98C</code>).</li>
+            <li><strong>Animated Route Line & Compass Rose</strong>: Copper trail path (<code>#B5622E</code>) that animates across the map as itineraries compile, paired with a rotating live compass needle.</li>
+            <li><strong>Typography</strong>: Header typography in <code>Space Grotesk</code>, data/body in <code>IBM Plex Mono</code>, and hand-lettered margin notes in <code>Caveat</code>.</li>
+        </ul>
 
-    <h2>2. Design Metaphor & Tokens</h2>
-    <ul>
-        <li><strong>Field Permit Registration Slip</strong>: Left permit panel styled on parchment (<code>#E8DCC0</code>) with stamped toggle chips and handwritten field margin notes.</li>
-        <li><strong>Topographic Map Canvas</strong>: Deep pine (<code>#1B2A22</code>) page background with SVG contour hairline rules (<code>#C9B98C</code>).</li>
-        <li><strong>Animated Route Line & Compass Rose</strong>: Copper trail path (<code>#B5622E</code>) that animates across the map as itineraries compile, paired with a rotating live compass needle.</li>
-        <li><strong>Typography</strong>: Header typography in <code>Space Grotesk</code>, data/body in <code>IBM Plex Mono</code>, and hand-lettered margin notes in <code>Caveat</code>.</li>
-    </ul>
+        <h2>3. Technical Stack & Architecture</h2>
+        <table>
+            <thead>
+                <tr>
+                    <th>Layer</th>
+                    <th>Technology</th>
+                    <th>Details</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><strong>Live Hosting</strong></td>
+                    <td>Render Cloud Platform</td>
+                    <td>Deployed live at <code>https://roamcraft.onrender.com</code></td>
+                </tr>
+                <tr>
+                    <td><strong>Backend Engine</strong></td>
+                    <td>Node.js / Express.js</td>
+                    <td>Manages REST endpoints, static file serving, and SSE streaming pipeline</td>
+                </tr>
+                <tr>
+                    <td><strong>Generative AI</strong></td>
+                    <td>Google Gemini API</td>
+                    <td>High-speed generative AI model configured for structured streaming output</td>
+                </tr>
+                <tr>
+                    <td><strong>Frontend UI</strong></td>
+                    <td>HTML5 / Vanilla CSS / ES6+ JS</td>
+                    <td>Field Expedition Dossier built with Space Grotesk, IBM Plex Mono & Caveat fonts, and Lucide Icons</td>
+                </tr>
+                <tr>
+                    <td><strong>Streaming Protocol</strong></td>
+                    <td>Server-Sent Events (SSE)</td>
+                    <td>HTTP streaming protocol for progressive chunk rendering in client browser</td>
+                </tr>
+            </tbody>
+        </table>
 
-    <h2>3. Technical Stack & Architecture</h2>
-    <table>
-        <thead>
-            <tr>
-                <th>Layer</th>
-                <th>Technology</th>
-                <th>Details</th>
-            </tr>
-        </thead>
-        <tbody>
-            <tr>
-                <td><strong>Live Hosting</strong></td>
-                <td>Render Cloud Platform</td>
-                <td>Deployed live at <code>https://roamcraft.onrender.com</code></td>
-            </tr>
-            <tr>
-                <td><strong>Backend Engine</strong></td>
-                <td>Node.js / Express.js</td>
-                <td>Manages REST endpoints, static file serving, and SSE streaming pipeline</td>
-            </tr>
-            <tr>
-                <td><strong>Generative AI</strong></td>
-                <td>Google Gemini API</td>
-                <td>High-speed generative AI model configured for structured streaming output</td>
-            </tr>
-            <tr>
-                <td><strong>Frontend UI</strong></td>
-                <td>HTML5 / Vanilla CSS / ES6+ JS</td>
-                <td>Field Expedition Dossier built with Space Grotesk, IBM Plex Mono & Caveat fonts, and Lucide Icons</td>
-            </tr>
-            <tr>
-                <td><strong>Streaming Protocol</strong></td>
-                <td>Server-Sent Events (SSE)</td>
-                <td>HTTP streaming protocol for progressive chunk rendering in client browser</td>
-            </tr>
-        </tbody>
-    </table>
-
-    <h2>4. API Endpoint Reference</h2>
-    <h3>POST <code>/api/generate-itinerary</code></h3>
-    <p><strong>Request Payload (JSON):</strong></p>
+        <h2>4. API Endpoint Reference</h2>
+        <h3>POST <code>/api/generate-itinerary</code></h3>
+        <p><strong>Request Payload (JSON):</strong></p>
 <pre><code>{
   "destination": "Kyoto, Japan",
   "days": 3,
@@ -267,16 +319,21 @@
   "interests": "temples, tea houses, ramen"
 }</code></pre>
 
-    <h2>5. Metadata & Credits</h2>
-    <ul>
-        <li><strong>Project Name</strong>: RoamCraft</li>
-        <li><strong>Author / Owner</strong>: Sagun Mardi (<code>sagun-glitch</code>)</li>
-        <li><strong>Live Application</strong>: <code>https://roamcraft.onrender.com</code></li>
-        <li><strong>Repository</strong>: <code>https://github.com/sagun-glitch/RoamCraft</code></li>
-    </ul>
+        <h2>5. Metadata & Credits</h2>
+        <ul>
+            <li><strong>Project Name</strong>: RoamCraft</li>
+            <li><strong>Author / Owner</strong>: Sagun Mardi (<code>sagun-glitch</code>)</li>
+            <li><strong>Live Application</strong>: <code>https://roamcraft.onrender.com</code></li>
+            <li><strong>Repository</strong>: <code>https://github.com/sagun-glitch/RoamCraft</code></li>
+        </ul>
 
-    <div style="margin-top: 3rem; text-align: center; font-size: 0.8rem; color: #94a3b8;" class="no-print">
-        <p>Press <strong>Ctrl + P</strong> (Cmd + P on Mac) to save this document as PDF.</p>
+        <div class="handwritten-note">
+            "Check water supply & trail maps before departure."
+        </div>
+
+        <div style="margin-top: 2rem; text-align: center; font-size: 0.78rem; color: #64748b;" class="no-print">
+            <p>Press <strong>Ctrl + P</strong> (Cmd + P on Mac) to save this document as PDF.</p>
+        </div>
     </div>
 </body>
 </html>
