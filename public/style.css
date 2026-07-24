@@ -1,26 +1,29 @@
 /* ==========================================================================
-   RoamCraft — Digital Expedition Dossier Theme
+   RoamCraft — Refined Digital Expedition Dossier Theme
    Field Cartographer's Trail Map + Permit Card
+   Strictly NO Gradients | Strictly NO Glassmorphism/Blur
    ========================================================================== */
 
 :root {
     /* Required Color Tokens */
     --map-ink: #1B2A22;          /* Deep pine, page background */
     --parchment: #E8DCC0;        /* Aged panel / card background */
+    --parchment-inset: #DFCFAC;  /* Inset field background */
     --contour: #C9B98C;          /* Thin hairline contour rules/dividers */
     --trail-copper: #B5622E;     /* Route line, primary accent, pins */
+    --trail-copper-hover: #9E5325;
     --sky-teal: #3E8C82;         /* Secondary accent — status, links */
     --text-dark: #1B2A22;        /* On parchment */
     --text-light: #EFE9D8;       /* On pine */
 
-    /* Required Typography */
+    /* Typography */
     --font-display: 'Space Grotesk', system-ui, sans-serif;
     --font-mono: 'IBM Plex Mono', monospace;
     --font-hand: 'Caveat', cursive;
 
-    --radius-sm: 4px;
-    --radius-md: 8px;
-    --radius-lg: 12px;
+    --radius-sm: 6px;
+    --radius-md: 10px;
+    --radius-lg: 14px;
 }
 
 /* Global Reset & Base */
@@ -55,7 +58,7 @@ body {
     position: relative;
     z-index: 1;
     display: grid;
-    grid-template-columns: 380px 1fr;
+    grid-template-columns: 390px 1fr;
     min-height: 100vh;
     max-width: 1440px;
     margin: 0 auto;
@@ -75,8 +78,8 @@ body {
     color: var(--text-dark);
     border: 2px solid var(--contour);
     border-radius: var(--radius-md);
-    padding: 1.75rem 1.5rem;
-    box-shadow: 6px 6px 0px rgba(0, 0, 0, 0.4);
+    padding: 1.85rem 1.6rem;
+    box-shadow: 6px 6px 0px #0D1510;
     display: flex;
     flex-direction: column;
     gap: 1.5rem;
@@ -88,8 +91,8 @@ body {
     content: '';
     position: absolute;
     top: -6px;
-    left: 10%;
-    right: 10%;
+    left: 8%;
+    right: 8%;
     height: 6px;
     background-color: var(--contour);
     clip-path: polygon(0 0, 10% 100%, 20% 0, 30% 100%, 40% 0, 50% 100%, 60% 0, 70% 100%, 80% 0, 90% 100%, 100% 0);
@@ -97,31 +100,32 @@ body {
 
 .permit-header {
     border-bottom: 2px dashed var(--contour);
-    padding-bottom: 1rem;
+    padding-bottom: 1.1rem;
     text-align: center;
 }
 
 .permit-badge {
     font-family: var(--font-mono);
-    font-size: 0.68rem;
-    font-weight: 600;
+    font-size: 0.7rem;
+    font-weight: 700;
     color: var(--trail-copper);
     letter-spacing: 0.12em;
 }
 
 .permit-title {
     font-family: var(--font-display);
-    font-size: 2rem;
+    font-size: 2.1rem;
     font-weight: 800;
     color: var(--text-dark);
-    letter-spacing: 0.05em;
+    letter-spacing: 0.04em;
     line-height: 1;
     margin-top: 0.25rem;
 }
 
 .permit-subtitle {
     font-family: var(--font-mono);
-    font-size: 0.62rem;
+    font-size: 0.65rem;
+    font-weight: 600;
     color: var(--sky-teal);
     letter-spacing: 0.08em;
     margin-top: 0.35rem;
@@ -130,44 +134,45 @@ body {
 .permit-form {
     display: flex;
     flex-direction: column;
-    gap: 1.15rem;
+    gap: 1.25rem;
 }
 
 .permit-field {
     display: flex;
     flex-direction: column;
-    gap: 0.4rem;
+    gap: 0.45rem;
 }
 
 .permit-field label {
     font-family: var(--font-mono);
     font-size: 0.68rem;
-    font-weight: 600;
+    font-weight: 700;
     color: var(--text-dark);
     letter-spacing: 0.04em;
 }
 
 .input-slot input, .input-slot select {
     width: 100%;
-    background-color: #E2D4B2;
-    border: 1px solid var(--contour);
+    background-color: var(--parchment-inset);
+    border: 2px solid var(--contour);
     border-radius: var(--radius-sm);
     color: var(--text-dark);
-    padding: 0.6rem 0.75rem;
+    padding: 0.65rem 0.85rem;
     font-family: var(--font-mono);
     font-size: 0.88rem;
     outline: none;
-    transition: border-color 0.15s ease;
+    transition: all 0.15s ease;
 }
 
 .input-slot input:focus, .input-slot select:focus {
     border-color: var(--trail-copper);
-    background-color: #EFE4C8;
+    background-color: #E6D7B7;
+    box-shadow: 0 0 0 1px var(--trail-copper);
 }
 
 .permit-actions {
     display: flex;
-    gap: 0.65rem;
+    gap: 0.75rem;
     margin-top: 0.5rem;
 }
 
@@ -176,25 +181,25 @@ body {
     display: inline-flex;
     align-items: center;
     justify-content: center;
-    gap: 0.5rem;
+    gap: 0.6rem;
     background-color: var(--trail-copper);
     border: 2px solid var(--trail-copper);
     color: var(--parchment);
-    padding: 0.85rem 1rem;
+    padding: 0.9rem 1.1rem;
     border-radius: var(--radius-sm);
     font-family: var(--font-display);
-    font-size: 0.88rem;
-    font-weight: 700;
-    letter-spacing: 0.05em;
+    font-size: 0.92rem;
+    font-weight: 800;
+    letter-spacing: 0.04em;
     cursor: pointer;
-    box-shadow: 3px 3px 0px var(--text-dark);
-    transition: transform 0.15s ease, box-shadow 0.15s ease;
+    box-shadow: 4px 4px 0px #0D1510;
+    transition: transform 0.15s ease, box-shadow 0.15s ease, background-color 0.15s ease;
 }
 
 .stamp-btn:hover:not(:disabled) {
     transform: translate(-1px, -1px);
-    box-shadow: 4px 4px 0px var(--text-dark);
-    background-color: #9E5325;
+    box-shadow: 5px 5px 0px #0D1510;
+    background-color: var(--trail-copper-hover);
 }
 
 .stamp-btn:disabled {
@@ -214,28 +219,30 @@ body {
     justify-content: center;
     width: 3.25rem;
     background-color: transparent;
-    border: 1px solid var(--contour);
+    border: 2px solid var(--contour);
     color: var(--text-dark);
     border-radius: var(--radius-sm);
     cursor: pointer;
     transition: background-color 0.15s ease;
+    box-shadow: 3px 3px 0px #0D1510;
 }
 
 .reset-permit-btn:hover {
-    background-color: #DCD0B1;
+    background-color: var(--parchment-inset);
 }
 
 .field-margin-note {
-    border-top: 1px solid var(--contour);
+    border-top: 2px solid var(--contour);
     padding-top: 0.85rem;
     margin-top: 0.5rem;
 }
 
 .handwritten {
     font-family: var(--font-hand);
-    font-size: 1.25rem;
+    font-size: 1.3rem;
+    font-weight: 700;
     color: var(--trail-copper);
-    line-height: 1.2;
+    line-height: 1.25;
     transform: rotate(-1.5deg);
 }
 
@@ -246,31 +253,31 @@ body {
     padding: 2rem 2.5rem;
     display: flex;
     flex-direction: column;
-    gap: 1.5rem;
+    gap: 1.75rem;
 }
 
 .chart-header {
     display: flex;
     justify-content: space-between;
     align-items: flex-end;
-    border-bottom: 1px stroke var(--contour);
-    border-bottom: 1px solid var(--contour);
+    border-bottom: 2px solid var(--contour);
     padding-bottom: 1rem;
 }
 
 .grid-coord {
     font-family: var(--font-mono);
-    font-size: 0.65rem;
+    font-size: 0.68rem;
+    font-weight: 600;
     color: var(--sky-teal);
     letter-spacing: 0.1em;
 }
 
 .chart-heading {
     font-family: var(--font-display);
-    font-size: 1.6rem;
+    font-size: 1.65rem;
     font-weight: 800;
     color: var(--text-light);
-    letter-spacing: 0.05em;
+    letter-spacing: 0.04em;
 }
 
 .canvas-actions-bar {
@@ -282,10 +289,11 @@ body {
 .status-indicator-tag {
     font-family: var(--font-mono);
     font-size: 0.72rem;
+    font-weight: 600;
     color: var(--sky-teal);
     background-color: rgba(62, 140, 130, 0.15);
-    border: 1px solid var(--sky-teal);
-    padding: 0.35rem 0.75rem;
+    border: 1.5px solid var(--sky-teal);
+    padding: 0.4rem 0.85rem;
     border-radius: var(--radius-sm);
 }
 
@@ -294,14 +302,16 @@ body {
     align-items: center;
     gap: 0.45rem;
     background-color: transparent;
-    border: 1px solid var(--contour);
+    border: 1.5px solid var(--contour);
     color: var(--text-light);
-    padding: 0.45rem 0.85rem;
+    padding: 0.45rem 0.95rem;
     border-radius: var(--radius-sm);
     font-family: var(--font-mono);
-    font-size: 0.8rem;
+    font-size: 0.82rem;
+    font-weight: 600;
     cursor: pointer;
     transition: all 0.15s ease;
+    box-shadow: 2px 2px 0px #0D1510;
 }
 
 .canvas-btn:hover:not(:disabled) {
@@ -312,18 +322,19 @@ body {
 .canvas-btn:disabled {
     opacity: 0.35;
     cursor: not-allowed;
+    box-shadow: none;
 }
 
 .canvas-btn i {
-    width: 0.9rem;
-    height: 0.9rem;
+    width: 0.95rem;
+    height: 0.95rem;
 }
 
 .canvas-btn-accent {
     background-color: var(--sky-teal);
     border-color: var(--sky-teal);
     color: var(--map-ink);
-    font-weight: 600;
+    font-weight: 700;
 }
 
 .canvas-btn-accent:hover:not(:disabled) {
@@ -332,16 +343,17 @@ body {
 
 /* Map Stage Section */
 .map-stage {
-    background-color: rgba(27, 42, 34, 0.7);
+    background-color: rgba(27, 42, 34, 0.85);
     border: 2px solid var(--contour);
     border-radius: var(--radius-lg);
-    padding: 1.5rem;
-    min-height: 220px;
+    padding: 1.75rem;
+    min-height: 240px;
     position: relative;
     display: flex;
     flex-direction: column;
     justify-content: center;
     overflow: hidden;
+    box-shadow: 5px 5px 0px #0D1510;
 }
 
 .compass-station {
@@ -351,18 +363,19 @@ body {
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap: 0.3rem;
+    gap: 0.35rem;
     z-index: 2;
-    background-color: rgba(27, 42, 34, 0.85);
-    padding: 0.5rem;
-    border: 1px stroke var(--contour);
-    border: 1px solid var(--contour);
+    background-color: #16231C;
+    padding: 0.65rem;
+    border: 1.5px solid var(--contour);
     border-radius: var(--radius-md);
+    box-shadow: 3px 3px 0px #0D1510;
 }
 
 .bearing-readout {
     font-family: var(--font-mono);
     font-size: 0.62rem;
+    font-weight: 600;
     color: var(--sky-teal);
     letter-spacing: 0.08em;
 }
@@ -412,35 +425,37 @@ body {
 }
 
 .empty-compass-box {
-    width: 3.5rem;
-    height: 3.5rem;
-    border: 1px dashed var(--contour);
+    width: 3.75rem;
+    height: 3.75rem;
+    border: 2px dashed var(--contour);
     border-radius: 50%;
     display: flex;
     align-items: center;
     justify-content: center;
     color: var(--trail-copper);
-    margin-bottom: 0.75rem;
+    margin-bottom: 0.85rem;
+    background-color: rgba(181, 98, 46, 0.1);
 }
 
 .empty-pin-icon {
-    width: 1.75rem;
-    height: 1.75rem;
+    width: 1.85rem;
+    height: 1.85rem;
 }
 
 .unmarked-map-empty h3 {
     font-family: var(--font-display);
-    font-size: 1.15rem;
-    font-weight: 700;
+    font-size: 1.2rem;
+    font-weight: 800;
     color: var(--text-light);
     letter-spacing: 0.05em;
 }
 
 .unmarked-map-empty p {
-    font-size: 0.85rem;
+    font-size: 0.88rem;
     color: var(--contour);
-    max-width: 420px;
+    max-width: 440px;
     margin-top: 0.35rem;
+    line-height: 1.5;
 }
 
 .route-loader {
@@ -451,14 +466,13 @@ body {
     padding: 1.5rem;
     color: var(--sky-teal);
     font-family: var(--font-mono);
-    font-size: 0.85rem;
+    font-size: 0.88rem;
     z-index: 2;
 }
 
 .loader-compass-spinner {
     width: 1.25rem;
     height: 1.25rem;
-    border: 2px stroke var(--contour);
     border: 2px solid var(--contour);
     border-top-color: var(--trail-copper);
     border-radius: 50%;
@@ -474,7 +488,7 @@ body {
     gap: 0.75rem;
     padding: 1rem 1.25rem;
     background-color: rgba(181, 98, 46, 0.2);
-    border: 1px solid var(--trail-copper);
+    border: 2px solid var(--trail-copper);
     border-radius: var(--radius-md);
     color: var(--text-light);
     z-index: 2;
@@ -500,11 +514,11 @@ body {
     color: var(--text-dark);
     border: 2px solid var(--contour);
     border-radius: var(--radius-md);
-    padding: 1.5rem;
-    box-shadow: 4px 4px 0px rgba(0, 0, 0, 0.3);
+    padding: 1.6rem;
+    box-shadow: 5px 5px 0px #0D1510;
     position: relative;
     display: grid;
-    grid-template-columns: 75px 1fr;
+    grid-template-columns: 80px 1fr;
 }
 
 .day-col-left {
@@ -514,7 +528,7 @@ body {
 
 .day-number {
     font-family: var(--font-display);
-    font-size: 2.2rem;
+    font-size: 2.35rem;
     font-weight: 800;
     color: var(--trail-copper);
     line-height: 1;
@@ -522,7 +536,8 @@ body {
 
 .day-label {
     font-family: var(--font-mono);
-    font-size: 0.62rem;
+    font-size: 0.65rem;
+    font-weight: 600;
     color: var(--sky-teal);
     letter-spacing: 0.08em;
 }
@@ -534,17 +549,17 @@ body {
 
 .day-title {
     font-family: var(--font-display);
-    font-size: 1.2rem;
-    font-weight: 700;
+    font-size: 1.25rem;
+    font-weight: 800;
     color: var(--text-dark);
-    margin-bottom: 0.75rem;
+    margin-bottom: 0.85rem;
     cursor: pointer;
     user-select: none;
     display: flex;
     justify-content: space-between;
     align-items: center;
-    border-bottom: 1px solid var(--contour);
-    padding-bottom: 0.5rem;
+    border-bottom: 2px solid var(--contour);
+    padding-bottom: 0.6rem;
 }
 
 .day-title::after {
@@ -576,9 +591,9 @@ body {
 
 .route-list {
     position: relative;
-    padding-left: 1.25rem;
-    margin-top: 0.5rem;
-    margin-bottom: 1rem;
+    padding-left: 1.35rem;
+    margin-top: 0.6rem;
+    margin-bottom: 1.1rem;
 }
 
 .route-list::before {
@@ -593,50 +608,51 @@ body {
 
 .route-stop {
     position: relative;
-    margin-bottom: 1rem;
+    margin-bottom: 1.1rem;
 }
 
 .route-stop::before {
     content: '';
     position: absolute;
-    left: -19px;
+    left: -20px;
     top: 6px;
-    width: 8px;
-    height: 8px;
+    width: 9px;
+    height: 9px;
     border-radius: 50%;
     background-color: var(--trail-copper);
+    border: 2px solid var(--parchment);
 }
 
 .stop-header {
     display: flex;
     align-items: center;
-    gap: 0.5rem;
+    gap: 0.55rem;
 }
 
 .stop-time {
     font-family: var(--font-mono);
     font-size: 0.75rem;
     color: var(--trail-copper);
-    font-weight: 600;
-    background-color: #E2D4B2;
-    padding: 0.15rem 0.45rem;
+    font-weight: 700;
+    background-color: var(--parchment-inset);
+    padding: 0.18rem 0.5rem;
     border-radius: var(--radius-sm);
     border: 1px solid var(--contour);
 }
 
 .stop-name {
     font-family: var(--font-display);
-    font-size: 0.92rem;
+    font-size: 0.95rem;
     font-weight: 700;
     color: var(--text-dark);
 }
 
 .stop-note {
     font-family: var(--font-mono);
-    font-size: 0.85rem;
+    font-size: 0.86rem;
     color: var(--text-dark);
     margin-top: 0.25rem;
-    line-height: 1.5;
+    line-height: 1.55;
 }
 
 .itinerary-output ul.checklist {
@@ -680,9 +696,10 @@ body {
 
 .itinerary-output h3:not(.day-title) {
     font-family: var(--font-display);
-    font-size: 1.15rem;
+    font-size: 1.18rem;
+    font-weight: 800;
     color: var(--text-dark);
-    border-top: 1px solid var(--contour);
+    border-top: 2px solid var(--contour);
     padding-top: 0.85rem;
     margin-top: 1.25rem;
     margin-bottom: 0.5rem;
@@ -692,21 +709,21 @@ body {
     background-color: var(--parchment);
     border: 2px solid var(--contour);
     border-radius: var(--radius-md);
-    padding: 1.25rem;
+    padding: 1.35rem 1.75rem;
     display: flex;
     flex-direction: column;
     align-items: center;
     gap: 0.75rem;
     align-self: center;
-    box-shadow: 4px 4px 0px rgba(0, 0, 0, 0.3);
+    box-shadow: 4px 4px 0px #0D1510;
 }
 
 .stamp-header-text {
     font-family: var(--font-mono);
-    font-size: 0.68rem;
+    font-size: 0.7rem;
     font-weight: 700;
     color: var(--trail-copper);
-    letter-spacing: 0.1em;
+    letter-spacing: 0.12em;
 }
 
 .hidden {
