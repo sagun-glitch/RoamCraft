@@ -1,32 +1,32 @@
 /* ==========================================================================
-   RoamCraft — Botanical Forest & Emerald Mint Minimalist Theme
+   RoamCraft — Warm Crimson & Amber Slate Theme
    Strictly NO Gradients | Strictly NO Glassmorphism/Blur
    ========================================================================== */
 
 :root {
-    /* Solid Palette */
-    --bg-main: #0C100D;           /* Deep Charcoal Canvas */
-    --bg-nav: #141A16;            /* Top Navbar Surface */
-    --bg-card: #1D2620;           /* Card Surface */
-    --bg-card-hover: #26332B;     /* Hover Card Surface */
-    --bg-input: #070A08;          /* Input Surface */
+    /* Solid Color Palette */
+    --bg-main: #120F12;           /* Deep Night Obsidian Canvas */
+    --bg-nav: #1E181F;            /* Top Navbar Surface */
+    --bg-card: #2A222B;           /* Card Surface */
+    --bg-card-hover: #362B38;     /* Hover Card Surface */
+    --bg-input: #0C0A0C;          /* Input Surface */
     
     /* Solid Accents */
-    --accent: #10B981;            /* Emerald Mint Accent */
-    --accent-hover: #34D399;      /* Bright Emerald */
-    --accent-dark: #059669;       /* Dark Emerald */
-    --brand-amber: #F59E0B;       /* Warm Amber */
-    --brand-red: #EF4444;         /* Coral Red */
+    --accent: #F43F5E;            /* Bright Crimson Accent */
+    --accent-hover: #FB7185;      /* Light Crimson */
+    --accent-dark: #E11D48;       /* Deep Crimson */
+    --brand-amber: #F59E0B;       /* Warm Gold Amber */
+    --brand-red: #F43F5E;         /* Crimson Red */
     
     /* Text / Ink */
-    --text-main: #F3F4F6;         /* Off-White Text */
-    --text-muted: #9CA3AF;        /* Secondary Slate Text */
-    --text-dim: #6B7280;          /* Subdued Label Text */
+    --text-main: #FFF1F2;         /* Crisp Warm White Text */
+    --text-muted: #FDA4AF;        /* Secondary Crimson Text */
+    --text-dim: #9F1239;          /* Subdued Text */
     
     /* Solid Borders */
-    --border: #2A382F;            /* Structural Border */
-    --border-highlight: #3A4C40;  /* Highlight Border */
-    --border-accent: #10B981;     /* Accent Border */
+    --border: #3B2E3C;            /* Structural Solid Border */
+    --border-highlight: #543E56;  /* Active Highlight Border */
+    --border-accent: #F43F5E;     /* Crimson Accent Border */
     
     /* Typography */
     --font-heading: 'Space Grotesk', system-ui, sans-serif;
@@ -106,7 +106,7 @@ body {
 
 .brand-tag {
     background-color: var(--accent);
-    color: #000000;
+    color: #FFFFFF;
     font-family: var(--font-mono);
     font-size: 0.65rem;
     font-weight: 700;
@@ -270,7 +270,7 @@ body {
 
 .btn-primary {
     background-color: var(--accent);
-    color: #000000;
+    color: #FFFFFF;
     border-color: var(--accent);
     box-shadow: 3px 3px 0px #000000;
 }
