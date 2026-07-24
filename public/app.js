@@ -168,6 +168,8 @@ document.addEventListener("DOMContentLoaded", () => {
         errorContainer.classList.add("hidden");
         outputContainer.classList.add("hidden");
         postmarkStamp.classList.add("hidden");
+        const trailRouteLayer = document.getElementById("trail-route-layer");
+        if (trailRouteLayer) trailRouteLayer.classList.remove("hidden");
         outputContainer.innerHTML = "";
         loader.classList.remove("hidden");
         submitBtn.disabled = true;
@@ -523,7 +525,7 @@ document.addEventListener("DOMContentLoaded", () => {
             <body>
                 <div class="print-header">
                     <div>
-                        <h1>Voyage<span>AI</span></h1>
+                        <h1>Roam<span>Craft</span></h1>
                         <div class="print-subtitle">Travel Itinerary Plan</div>
                     </div>
                     <div style="font-family: 'IBM Plex Mono', monospace; font-size: 0.85rem; color: #64748b; text-align: right;">
@@ -548,11 +550,13 @@ document.addEventListener("DOMContentLoaded", () => {
         emptyState.classList.remove("hidden");
         outputContainer.classList.add("hidden");
         postmarkStamp.classList.add("hidden");
+        const trailRouteLayer = document.getElementById("trail-route-layer");
+        if (trailRouteLayer) trailRouteLayer.classList.add("hidden");
         outputContainer.innerHTML = "";
         errorContainer.classList.add("hidden");
         printBtn.disabled = true;
         copyBtn.disabled = true;
-        statusText.textContent = "destination · days · budget";
+        statusText.textContent = "Ready";
         fullItineraryText = "";
     });
 
