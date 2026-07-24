@@ -4,7 +4,7 @@ const cors = require("cors");
 const path = require("path");
 const { GoogleGenerativeAI } = require("@google/generative-ai");
 
-// Prevent server crashes from unhandled promise rejections/uncaught exceptions (e.g. Gemini API hiccups)
+// Prevent server crashes from unhandled promise rejections/uncaught exceptions
 process.on("unhandledRejection", (reason, promise) => {
   console.error("Unhandled Rejection at:", promise, "reason:", reason);
 });
@@ -20,7 +20,7 @@ app.use(cors());
 app.use(express.json());
 app.use(express.static(path.join(__dirname, "public")));
 
-// Initialize Gemini API (safely fall back if key is missing)
+// Initialize Gemini API
 const getGeminiClient = () => {
   const apiKey = process.env.GEMINI_API_KEY;
   if (!apiKey) {
@@ -41,7 +41,7 @@ app.post("/api/generate-itinerary", async (req, res) => {
   const client = getGeminiClient();
   if (!client) {
     return res.status(500).json({
-      error: "Gemini API key is not configured on the server. Please set the GEMINI_API_KEY environment variable."
+      error: "Gemini API key is not configured on the server. Please set the GEMINI_API_KEY environment variable in Render dashboard."
     });
   }
 
@@ -51,15 +51,6 @@ app.post("/api/generate-itinerary", async (req, res) => {
   res.setHeader("Connection", "keep-alive");
 
   try {
-    const model = client.getGenerativeModel({
-      model: "gemini-2.5-flash",
-      generationConfig: {
-        temperature: 0.5,
-        maxOutputTokens: 2500
-      }
-    });
-
-    // Detailed prompt designed for beautifully formatted markdown structure
     const prompt = `
       You are an expert travel planner and local tour guide. Generate a detailed, engaging travel itinerary based on these details:
       - Destination: ${destination}
@@ -80,17 +71,40 @@ app.post("/api/generate-itinerary", async (req, res) => {
       Format the output cleanly. For days, use "### Day X: Day Title" and for stops, use the "* HH:MM - Stop Name: Note" format precisely. Avoid raw HTML tags. Start directly with the itinerary introduction.
     `;
 
-    const result = await model.generateContentStream(prompt);
+    // Try primary recommended model gemini-1.5-flash with automatic fallbacks
+    const modelNames = ["gemini-1.5-flash", "gemini-2.0-flash-exp", "gemini-1.5-pro"];
+    let result = null;
+    let lastErr = null;
+
+    for (const modelName of modelNames) {
+      try {
+        const model = client.getGenerativeModel({
+          model: modelName,
+          generationConfig: {
+            temperature: 0.5,
+            maxOutputTokens: 2500
+          }
+        });
+        result = await model.generateContentStream(prompt);
+        if (result) break;
+      } catch (err) {
+        lastErr = err;
+        console.warn(`Model ${modelName} failed, trying fallback...`, err.message);
+      }
+    }
+
+    if (!result) {
+      throw lastErr || new Error("Failed to initialize AI model stream.");
+    }
 
     for await (const chunk of result.stream) {
       try {
         const chunkText = chunk.text();
         if (chunkText) {
-          // Send SSE data format
           res.write(`data: ${JSON.stringify({ text: chunkText })}\n\n`);
         }
       } catch (chunkErr) {
-        console.warn("Skipping chunk error (non-text/safety metadata):", chunkErr.message);
+        console.warn("Skipping non-text chunk:", chunkErr.message);
       }
     }
 
@@ -98,8 +112,7 @@ app.post("/api/generate-itinerary", async (req, res) => {
     res.end();
   } catch (error) {
     console.error("Error generating content stream:", error);
-    // Send error message through the stream so the UI can display it
-    res.write(`data: ${JSON.stringify({ error: error.message || "Failed to generate itinerary due to an internal server error." })}\n\n`);
+    res.write(`data: ${JSON.stringify({ error: error.message || "Failed to generate itinerary due to server error." })}\n\n`);
     res.end();
   }
 });
@@ -111,5 +124,5 @@ app.get("*", (req, res) => {
 
 app.listen(PORT, () => {
   console.log(`Server is running on port ${PORT}`);
-  console.log(`Open http://localhost:${PORT} in your browser to test.`);
+  console.log(`Open http://localhost:${PORT} in your browser.`);
 });
