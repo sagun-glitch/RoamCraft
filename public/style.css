@@ -1,31 +1,32 @@
 /* ==========================================================================
-   RoamCraft — Terracotta Sand & Slate Minimalist Theme
+   RoamCraft — Botanical Forest & Emerald Mint Minimalist Theme
    Strictly NO Gradients | Strictly NO Glassmorphism/Blur
    ========================================================================== */
 
 :root {
-    /* Solid Color Palette */
-    --bg-main: #141312;           /* Deep Sand Canvas */
-    --bg-nav: #1D1B18;            /* Navigation Surface */
-    --bg-card: #25221F;           /* Card & Module Surface */
-    --bg-card-hover: #2F2B27;     /* Hover Surface */
-    --bg-input: #0D0C0B;          /* Input Field Surface */
+    /* Solid Palette */
+    --bg-main: #0C100D;           /* Deep Charcoal Canvas */
+    --bg-nav: #141A16;            /* Top Navbar Surface */
+    --bg-card: #1D2620;           /* Card Surface */
+    --bg-card-hover: #26332B;     /* Hover Card Surface */
+    --bg-input: #070A08;          /* Input Surface */
     
     /* Solid Accents */
-    --accent: #E05638;            /* Solid Terracotta Accent */
-    --accent-hover: #F06748;      /* Bright Terracotta */
-    --accent-dark: #B83A1F;       /* Dark Terracotta */
-    --brand-gold: #D99B26;        /* Solid Ochre Gold */
+    --accent: #10B981;            /* Emerald Mint Accent */
+    --accent-hover: #34D399;      /* Bright Emerald */
+    --accent-dark: #059669;       /* Dark Emerald */
+    --brand-amber: #F59E0B;       /* Warm Amber */
+    --brand-red: #EF4444;         /* Coral Red */
     
     /* Text / Ink */
-    --text-main: #F5F2EB;         /* Off-White Sand Text */
-    --text-muted: #A39B8F;        /* Muted Sand Text */
-    --text-dim: #70685D;          /* Subdued Label Text */
+    --text-main: #F3F4F6;         /* Off-White Text */
+    --text-muted: #9CA3AF;        /* Secondary Slate Text */
+    --text-dim: #6B7280;          /* Subdued Label Text */
     
     /* Solid Borders */
-    --border: #36302B;            /* Structural Solid Border */
-    --border-highlight: #4D453E;  /* Active Highlight Border */
-    --border-accent: #E05638;     /* Terracotta Accent Border */
+    --border: #2A382F;            /* Structural Border */
+    --border-highlight: #3A4C40;  /* Highlight Border */
+    --border-accent: #10B981;     /* Accent Border */
     
     /* Typography */
     --font-heading: 'Space Grotesk', system-ui, sans-serif;
@@ -105,7 +106,7 @@ body {
 
 .brand-tag {
     background-color: var(--accent);
-    color: #FFFFFF;
+    color: #000000;
     font-family: var(--font-mono);
     font-size: 0.65rem;
     font-weight: 700;
@@ -269,7 +270,7 @@ body {
 
 .btn-primary {
     background-color: var(--accent);
-    color: #FFFFFF;
+    color: #000000;
     border-color: var(--accent);
     box-shadow: 3px 3px 0px #000000;
 }
@@ -481,7 +482,7 @@ body {
     width: 8px;
     height: 8px;
     border-radius: 50%;
-    background-color: var(--brand-gold);
+    background-color: var(--brand-amber);
     border: 2px solid var(--bg-nav);
 }
 
@@ -659,7 +660,7 @@ body {
 .info-card h4 i {
     width: 1rem;
     height: 1rem;
-    color: var(--brand-gold);
+    color: var(--brand-amber);
 }
 
 .info-card ul {
@@ -681,7 +682,7 @@ body {
     content: '•';
     position: absolute;
     left: 0;
-    color: var(--brand-gold);
+    color: var(--brand-amber);
 }
 
 .app-footer {
