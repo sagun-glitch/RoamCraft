@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>RoamCraft — Project Documentation</title>
+    <title>RoamCraft — Project Specification</title>
     <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -11,9 +11,10 @@
     <style>
         :root {
             --primary: #E05638;
+            --primary-dark: #B83A1F;
             --dark: #141312;
-            --text: #27272a;
-            --border: #e4e4e7;
+            --text: #334155;
+            --border: #e2e8f0;
             --bg-subtle: #f8fafc;
         }
 
@@ -45,9 +46,10 @@
 
         .title-group h1 {
             font-family: 'Space Grotesk', sans-serif;
-            font-size: 2.25rem;
+            font-size: 2.35rem;
             font-weight: 700;
             color: var(--dark);
+            letter-spacing: -0.02em;
         }
 
         .title-group h1 span {
@@ -67,10 +69,28 @@
             text-align: right;
         }
 
-        /* Section Headings */
+        /* Live Badge Box */
+        .live-link-box {
+            background-color: #fff7ed;
+            border: 2px solid var(--primary);
+            border-radius: 8px;
+            padding: 1.1rem 1.35rem;
+            margin: 1.5rem 0 2rem;
+            font-family: 'IBM Plex Mono', monospace;
+            font-size: 0.9rem;
+            color: var(--dark);
+        }
+
+        .live-link-box a {
+            color: var(--primary-dark);
+            font-weight: 700;
+            text-decoration: underline;
+        }
+
+        /* Headings */
         h2 {
             font-family: 'Space Grotesk', sans-serif;
-            font-size: 1.35rem;
+            font-size: 1.4rem;
             color: var(--dark);
             border-bottom: 1px solid var(--border);
             padding-bottom: 0.4rem;
@@ -80,45 +100,28 @@
 
         h3 {
             font-family: 'Space Grotesk', sans-serif;
-            font-size: 1.05rem;
-            color: var(--primary);
+            font-size: 1.1rem;
+            color: var(--primary-dark);
             margin-top: 1.25rem;
             margin-bottom: 0.5rem;
         }
 
         p {
-            font-size: 0.92rem;
+            font-size: 0.94rem;
             color: #334155;
             margin-bottom: 1rem;
         }
 
-        .live-link-box {
-            background-color: #fff7ed;
-            border: 2px solid var(--primary);
-            border-radius: 8px;
-            padding: 1rem 1.25rem;
-            margin: 1.25rem 0;
-            font-family: 'IBM Plex Mono', monospace;
-            font-size: 0.9rem;
-            color: var(--dark);
-        }
-
-        .live-link-box a {
-            color: var(--primary);
-            font-weight: 700;
-            text-decoration: underline;
-        }
-
-        /* Feature List */
+        /* Lists */
         ul, ol {
             padding-left: 1.25rem;
             margin-bottom: 1.25rem;
         }
 
         li {
-            font-size: 0.9rem;
+            font-size: 0.92rem;
             color: #334155;
-            margin-bottom: 0.4rem;
+            margin-bottom: 0.45rem;
         }
 
         li strong {
@@ -130,12 +133,12 @@
             width: 100%;
             border-collapse: collapse;
             margin: 1.25rem 0;
-            font-size: 0.88rem;
+            font-size: 0.9rem;
         }
 
         th, td {
             border: 1px solid var(--border);
-            padding: 0.65rem 0.85rem;
+            padding: 0.7rem 0.9rem;
             text-align: left;
         }
 
@@ -146,24 +149,25 @@
             color: var(--dark);
         }
 
-        /* Code Blocks */
+        /* Code & Pre */
         pre {
             background-color: #18181b;
-            color: #f4f4f5;
+            color: #f8fafc;
             font-family: 'IBM Plex Mono', monospace;
-            font-size: 0.82rem;
-            padding: 1rem;
-            border-radius: 6px;
+            font-size: 0.83rem;
+            padding: 1.1rem;
+            border-radius: 8px;
             overflow-x: auto;
-            margin: 1rem 0;
+            margin: 1.25rem 0;
+            line-height: 1.5;
         }
 
         code {
             font-family: 'IBM Plex Mono', monospace;
-            font-size: 0.85rem;
+            font-size: 0.86rem;
             background-color: #f1f5f9;
-            color: var(--primary);
-            padding: 0.15rem 0.35rem;
+            color: var(--primary-dark);
+            padding: 0.15rem 0.4rem;
             border-radius: 4px;
         }
 
@@ -188,7 +192,7 @@
     <div class="doc-header">
         <div class="title-group">
             <h1>Roam<span>Craft</span></h1>
-            <p>AI-Powered Travel Itinerary Generator — Technical Specification</p>
+            <p>Simple AI-Powered Travel Itinerary Generator — Project Specification</p>
         </div>
         <div class="doc-meta">
             <strong>VERSION 1.0</strong><br>
@@ -196,78 +200,86 @@
         </div>
     </div>
 
-    <h2>1. Executive Summary</h2>
-    <p><strong>RoamCraft</strong> is an intelligent web application designed to simplify vacation planning. Powered by <strong>Google Gemini 2.5 Flash</strong> and built on a high-performance <strong>Node.js & Express</strong> backend, RoamCraft allows users to generate comprehensive, day-by-day travel itineraries in real-time streaming mode.</p>
-
     <div class="live-link-box">
-        <strong>🌐 Live Deployment:</strong> <a href="https://roamcraft.onrender.com" target="_blank">https://roamcraft.onrender.com</a><br>
+        <strong>🌐 Live Web Application:</strong> <a href="https://roamcraft.onrender.com" target="_blank">https://roamcraft.onrender.com</a><br>
         <strong>📦 GitHub Repository:</strong> <a href="https://github.com/sagun-glitch/RoamCraft" target="_blank">https://github.com/sagun-glitch/RoamCraft</a>
     </div>
 
-    <h2>2. Key Features</h2>
+    <h2>1. Executive Summary</h2>
+    <p><strong>RoamCraft</strong> is a lightweight, AI-driven vacation planning platform built with <strong>Node.js, Express, and Google Gemini 2.5 Flash</strong>. It generates comprehensive, day-by-day travel itineraries delivered via <strong>Server-Sent Events (SSE)</strong> real-time streaming based on user destination, duration, budget tier, and custom activity preferences.</p>
+
+    <h2>2. Key Highlights & Features</h2>
     <ul>
-        <li><strong>Real-Time AI Streaming (Server-Sent Events)</strong>: Delivers instant markdown-formatted itinerary updates chunk-by-chunk without long loading waits.</li>
-        <li><strong>Customizable Parameters</strong>: Flexible inputs for Destination, Trip Duration (1-14 days), Budget Tiers (Budget, Moderate, Luxury), and Personal Interests.</li>
-        <li><strong>Interactive Day-by-Day Dashboard</strong>: Expandable timeline cards, morning/afternoon/evening schedule nodes, packing checklists, and local tips.</li>
-        <li><strong>One-Click Export & Print</strong>: Styled PDF/Print document export and clipboard text copying.</li>
+        <li><strong>Real-Time AI Streaming</strong>: Delivers instant markdown-formatted itinerary updates chunk-by-chunk using Server-Sent Events (SSE) without long loading delays.</li>
+        <li><strong>Precision Personalization</strong>: Tailors daily itineraries based on budget tier (Budget-friendly, Moderate, Luxury) and custom interest preferences (e.g. food tours, historical places, beaches, hiking).</li>
+        <li><strong>Interactive Day-by-Day Dashboard</strong>: Renders structured day blocks with morning/afternoon/evening schedules, interactive packing checkboxes, and local travel tips.</li>
+        <li><strong>One-Click Export & Printing</strong>: Integrated print/PDF engine formats custom itineraries into clean, styled documents.</li>
         <li><strong>Scandinavian Terracotta Sand Theme</strong>: High-contrast, clean UI designed for maximum readability without gradients or glassmorphism.</li>
     </ul>
 
-    <h2>3. Technical Stack & Deployment</h2>
+    <h2>3. Technical Stack & Architecture</h2>
     <table>
         <thead>
             <tr>
-                <th>Component</th>
+                <th>Layer</th>
                 <th>Technology</th>
-                <th>Description</th>
+                <th>Details</th>
             </tr>
         </thead>
         <tbody>
             <tr>
-                <td><strong>Live Deployment</strong></td>
-                <td>Render Cloud Hosting</td>
+                <td><strong>Live Hosting</strong></td>
+                <td>Render Cloud Platform</td>
                 <td>Deployed live at <code>https://roamcraft.onrender.com</code></td>
             </tr>
             <tr>
-                <td><strong>Backend Framework</strong></td>
+                <td><strong>Backend Engine</strong></td>
                 <td>Node.js / Express.js</td>
-                <td>Handles REST endpoints, static asset serving, and SSE streaming.</td>
+                <td>Manages REST endpoints, static file serving, and SSE streaming pipeline</td>
             </tr>
             <tr>
-                <td><strong>AI Model</strong></td>
+                <td><strong>Generative AI</strong></td>
                 <td>Google Gemini 2.5 Flash</td>
-                <td>High-speed generative AI for structuring personalized itineraries.</td>
+                <td>High-speed generative AI model configured for structured streaming output</td>
             </tr>
             <tr>
                 <td><strong>Frontend UI</strong></td>
                 <td>HTML5 / Vanilla CSS / ES6+ JS</td>
-                <td>Lightweight dashboard interface with Lucide Icons & Google Fonts.</td>
+                <td>Dashboard interface built with Space Grotesk & IBM Plex fonts, and Lucide Icons</td>
             </tr>
             <tr>
-                <td><strong>Data Protocol</strong></td>
+                <td><strong>Streaming Protocol</strong></td>
                 <td>Server-Sent Events (SSE)</td>
-                <td>Enables real-time chunked streaming output to client browser.</td>
+                <td>HTTP streaming protocol for progressive chunk rendering in client browser</td>
             </tr>
         </tbody>
     </table>
 
-    <h2>4. API Specification</h2>
+    <h2>4. API Endpoint Reference</h2>
     <h3>POST <code>/api/generate-itinerary</code></h3>
-    <p><strong>Request Body (JSON):</strong></p>
+    <p><strong>Request Payload (JSON):</strong></p>
 <pre><code>{
-  "destination": "Paris, France",
+  "destination": "Rome, Italy",
   "days": 3,
   "budget": "Moderate",
-  "interests": "museums, bakeries, evening walks"
+  "interests": "historic ruins, authentic pasta, neighborhood walks"
 }</code></pre>
 
-    <h2>5. Setup & Local Installation</h2>
+    <h2>5. Local Development & Deployment</h2>
     <ol>
         <li>Clone repository: <code>git clone https://github.com/sagun-glitch/RoamCraft.git</code></li>
         <li>Install dependencies: <code>npm install</code></li>
-        <li>Add <code>.env</code> file with <code>GEMINI_API_KEY=YOUR_KEY</code></li>
+        <li>Configure environment file <code>.env</code> with <code>GEMINI_API_KEY=YOUR_KEY</code></li>
         <li>Start server: <code>npm start</code> (Open <code>http://localhost:3000</code> or visit <code>https://roamcraft.onrender.com</code>)</li>
     </ol>
+
+    <h2>6. Metadata & Credits</h2>
+    <ul>
+        <li><strong>Project Name</strong>: RoamCraft</li>
+        <li><strong>Author / Owner</strong>: Sagun Mardi (<code>sagun-glitch</code>)</li>
+        <li><strong>Live Application</strong>: <code>https://roamcraft.onrender.com</code></li>
+        <li><strong>Repository</strong>: <code>https://github.com/sagun-glitch/RoamCraft</code></li>
+    </ul>
 
     <div style="margin-top: 3rem; text-align: center; font-size: 0.8rem; color: #94a3b8;" class="no-print">
         <p>Press <strong>Ctrl + P</strong> (Cmd + P on Mac) to save this document as PDF.</p>
